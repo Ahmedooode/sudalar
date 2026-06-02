@@ -1,26 +1,47 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Brand Custom Colors */
+  --color-secondary-container: #fed01b;
+  --color-primary-container: #131b2e;
+  --color-background: #f9f9f9;
+  --color-primary: #000000;
+  --color-on-background: #1b1b1b;
+  --color-on-surface-variant: #45464d;
+  --color-surface-container-low: #f3f3f3;
+  --color-surface-container-high: #e8e8e8;
+  --color-surface-container: #eeeeee;
+  --color-surface-container-lowest: #ffffff;
+  --color-tertiary-fixed-dim: #c4c7ca;
+  --color-secondary-fixed-dim: #eec200;
+
+  /* Typography System matching code.html custom config */
+  --font-body-md: "Montserrat", sans-serif;
+  --font-headline-xl: "Montserrat", sans-serif;
+  --font-data-display: "Space Mono", monospace;
+  --font-label-mono: "Space Mono", monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Custom Neo-Brutalisim Utilities */
+@utility shadow-neo {
+  box-shadow: 4px 4px 0px 0px #000000;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@utility shadow-neo-lg {
+  box-shadow: 8px 8px 0px 0px #000000;
 }
 
+@utility shadow-neo-gold {
+  box-shadow: 4px 4px 0px 0px #fed01b;
+}
+
+@utility shadow-neo-gold-lg {
+  box-shadow: 8px 8px 0px 0px #fed01b;
+}
+
+/* Global resets using themed tokens */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  font-family: var(--font-body-md);
 }
