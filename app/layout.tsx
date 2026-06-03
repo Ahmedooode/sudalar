@@ -1,68 +1,86 @@
-import type { Metadata } from "next";
+"use client";
+
+import React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Montserrat, Cairo } from "next/font/google";
+import { BottomNavBar } from "../components/BottomNavBar";
 import "./globals.css";
 
-// Load Montserrat for primary English typography
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-body-md",
   display: "swap",
 });
 
-// Load Cairo for premium, clean Arabic typography
 const cairo = Cairo({
   subsets: ["arabic"],
   variable: "--font-arabic",
   display: "swap",
 });
 
-// Essential SEO Metadata base setup
-export const metadata: Metadata = {
-  title: "Sudan Solar | Industrial Solar Energy Solutions",
-  description:
-    "Providing the most resilient, heavy-duty solar infrastructure and unit capabilities for residential, commercial, and agricultural grids in Sudan.",
-  keywords: [
-    "Solar Energy Sudan",
-    "Sudan Solar",
-    "Solar systems Khartoum",
-    "طاقة شمسية في السودان",
-  ],
-  authors: [{ name: "Sudan Solar Industrial Corp" }],
-  openGraph: {
-    title: "Sudan Solar | Industrial Solar Energy Solutions",
-    description:
-      "Resilient solar infrastructure built for extreme environments.",
-    url: "https://sudansolar.com", // Replace with your production domain later
-    siteName: "Sudan Solar",
-    images: [
-      {
-        url: "/og-image.jpg", // Place your OpenGraph cover image in the public folder later
-        width: 1200,
-        height: 630,
-        alt: "Sudan Solar Industrial Array",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-};
-
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const pathname = usePathname();
+
   return (
-    // Set default language to English, injecting both font variables
-    <html lang="en" className={`${montserrat.variable} ${cairo.variable}`}>
+    <html lang="ar" className={`${montserrat.variable} ${cairo.variable}`}>
       <head>
-        {/* Material Symbols Outlined Icon Font integration */}
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased bg-background text-on-background min-h-screen pb-20 md:pb-0 font-arabic">
+        {/* GLOBAL HEADER - AUTO SHOWS ON ALL PAGES ON DESKTOP */}
+        <header className="bg-surface-container-lowest border-b-[4px] border-primary fixed top-0 left-0 w-full z-50 h-20">
+          <div className="flex justify-between items-center w-full px-4 md:px-10 h-full max-w-7xl mx-auto">
+            <div className="text-xl md:text-2xl font-black tracking-tighter text-primary">
+              سودان سولار
+            </div>
+
+            <nav className="hidden md:flex gap-8 items-center h-full">
+              <Link
+                href="/"
+                className={`font-bold text-sm uppercase tracking-wider ${pathname === "/" ? "border-b-2 border-primary pb-1 text-primary" : "text-on-surface-variant hover:bg-secondary-container px-2 py-1 transition-all"}`}
+              >
+                الرئيسية
+              </Link>
+              <Link
+                href="/viability"
+                className={`font-bold text-sm uppercase tracking-wider ${pathname === "/viability" ? "border-b-2 border-primary pb-1 text-primary" : "text-on-surface-variant hover:bg-secondary-container px-2 py-1 transition-all"}`}
+              >
+                الجدوى الكلية
+              </Link>
+              <Link
+                href="/calculator"
+                className={`font-bold text-sm uppercase tracking-wider ${pathname === "/calculator" ? "border-b-2 border-primary pb-1 text-primary" : "text-on-surface-variant hover:bg-secondary-container px-2 py-1 transition-all"}`}
+              >
+                حاسبة الأحمال
+              </Link>
+              <Link
+                href="/grid"
+                className={`font-bold text-sm uppercase tracking-wider ${pathname === "/grid" ? "border-b-2 border-primary pb-1 text-primary" : "text-on-surface-variant hover:bg-secondary-container px-2 py-1 transition-all"}`}
+              >
+                خريطة الشبكة
+              </Link>
+            </nav>
+
+            <button className="bg-secondary-container text-primary font-bold border-[3px] border-primary px-4 md:px-6 py-2 shadow-neo text-xs md:text-sm uppercase">
+              ابدأ الآن
+            </button>
+          </div>
+        </header>
+
+        {/* CURRENT ROUTE CONTENT */}
+        {children}
+
+        {/* GLOBAL BOTTOM NAV BAR - AUTO SHOWS ON ALL PAGES ON MOBILE */}
+        <BottomNavBar />
+      </body>
     </html>
   );
 }
