@@ -15,11 +15,12 @@
   --color-tertiary-fixed-dim: #c4c7ca;
   --color-secondary-fixed-dim: #eec200;
 
-  /* Typography System matching code.html custom config */
-  --font-body-md: "Montserrat", sans-serif;
-  --font-headline-xl: "Montserrat", sans-serif;
+  /* Typography System v4 Mapping */
+  --font-body-md: "var(--font-body-md)", "Montserrat", sans-serif;
+  --font-headline-xl: "var(--font-body-md)", "Montserrat", sans-serif;
   --font-data-display: "Space Mono", monospace;
   --font-label-mono: "Space Mono", monospace;
+  --font-arabic: "var(--font-arabic)", "Cairo", sans-serif;
 }
 
 /* Custom Neo-Brutalisim Utilities */
@@ -43,5 +44,4 @@
 body {
   background-color: var(--color-background);
   color: var(--color-on-background);
-  font-family: var(--font-body-md);
 }

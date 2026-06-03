@@ -7,9 +7,7 @@ import { Infrastructure } from "../components/Infrastructure";
 import { Pricing } from "../components/Pricing";
 import { ProjectsBanner } from "../components/ProjectsBanner";
 import { CTA } from "../components/CTA";
-import { Footer } from "../components/Footer";
 
-// 1. Define strict TypeScript interfaces to prevent ESLint 'any' errors
 interface Dictionary {
   nav: {
     title: string;
@@ -86,7 +84,6 @@ interface Dictionary {
   };
 }
 
-// 2. The Dictionaries Database
 const dictionaries: { en: Dictionary; ar: Dictionary } = {
   en: {
     nav: {
@@ -97,43 +94,43 @@ const dictionaries: { en: Dictionary; ar: Dictionary } = {
       cta: "GET STARTED",
     },
     hero: {
-      title1: "EMPOWER",
-      title2: "YOUR LIFE",
+      title1: "AUTONOMOUS POWER",
+      title2: "AGAINST COGNITIVE DECAY",
       description:
-        "Raw power meets industrial precision. Sudan Solar provides the most resilient solar infrastructure for the harshest environments on Earth. No fluff, just voltage.",
-      cta_deploy: "DEPLOY SYSTEM",
-      cta_view: "VIEW GRID",
+        "Escape the crumbling national energy infrastructure. Sudan Solar engineers tactical, heavy-duty solar installations designed to isolate your estate, agricultural operations, or facility from ongoing grid collapse. Raw voltage, zero compromises.",
+      cta_deploy: "EXPLORE FEASIBILITY",
+      cta_view: "GRID STABILITY MAP",
     },
     stats: {
       uptime_val: "98.4%",
-      uptime_label: "UPTIME EFFICIENCY",
+      uptime_label: "SOLAR EXP_EFFICIENCY",
       capacity_val: "12.5 GW",
-      capacity_label: "GRID CAPACITY",
+      capacity_label: "REGIONAL INFRASTRUCTURE",
       latency_val: "0.02ms",
-      latency_label: "SWITCH LATENCY",
-      reliability_val: "INF",
-      reliability_label: "RELIABILITY RATING",
+      latency_label: "UPS AUTOMATED SWITCH",
+      reliability_val: "CRITICAL",
+      reliability_label: "NATIONAL GRID METRIC",
     },
     infrastructure: {
-      tag: "CORE TECH",
-      title: "INDUSTRIAL CORE",
+      tag: "GRID DECOUPLING",
+      title: "THE VIABLE ALTERNATIVE",
       description:
-        "Heavy-duty hardware designed to withstand thermal expansion and high-velocity wind loads.",
-      card1_title: "ARMORED CASING",
+        "Why solar isn't a luxury, but the ultimate infrastructure counter-measure against ongoing public grid dependency in Sudan.",
+      card1_title: "TOTAL INDEPENDENCE",
       card1_desc:
-        "Reinforced concrete foundations with 10mm steel plating for critical junctions.",
-      card1_f1: "IP68 WATERPROOF",
-      card1_f2: "HEAT-SHIELDED",
-      card2_title: "DIRECT INJECT",
+        "Isolate your facility fully from volatile load-shedding intervals and frequent grid voltage spikes.",
+      card1_f1: "24/7 FIXED VOLTAGE",
+      card1_f2: "GRID-TIED ISOLATION",
+      card2_title: "THERMAL RESILIENCE",
       card2_desc:
-        "Zero-loss transmission technology using high-purity copper conduits.",
-      card2_f1: "400V DC OUTPUT",
-      card2_f2: "REAL-TIME BALANCING",
-      card3_title: "LOGIC CORE",
+        "Industrial-grade hardware matrices optimized to function at maximum output even in desert temperatures exceeding 50°C.",
+      card2_f1: "AUTOMATED COOLING",
+      card2_f2: "HIGH-FLOW AIR DYNAMICS",
+      card3_title: "FINANCIAL SUSTAINABILITY",
       card3_desc:
-        "On-site computational units for automated load-shedding and predictive maintenance.",
-      card3_f1: "EDGE COMPUTING",
-      card3_f2: "OFFLINE SYNC",
+        "Recover 100% of deployment capital expenditures within 24 months by removing diesel generator running dependencies.",
+      card3_f1: "ZERO FUEL OVERHEADS",
+      card3_f2: "PREDICTIVE LIFE CYCLE",
     },
     pricing: {
       title: "SELECT UNIT CAPACITY",
@@ -157,20 +154,20 @@ const dictionaries: { en: Dictionary; ar: Dictionary } = {
       lbl_monitoring: "MONITORING",
     },
     projects: {
-      title: "PROVEN OPERATIONS",
+      title: "ESTABLISHED OPERATIONAL STATIONS",
       subtitle:
-        "Heavy-duty hardware array deployments successfully operating across various configurations in Sudan.",
+        "Strategic solar arrays currently proving long-term electrical reliability across key zones in Sudan.",
     },
     cta: {
       title: "READY FOR IMPACT?",
       subtitle:
         "Join the infrastructure revolution. Secure your energy independence today.",
-      s1_title: "STEP 01",
-      s1_desc: "SITE EVALUATION & GRID MAPPING",
-      s2_title: "STEP 02",
-      s2_desc: "HARDWARE DEPLOYMENT & SYNC",
-      s3_title: "STEP 03",
-      s3_desc: "FULL GRID AUTONOMY ACHIEVED",
+      s1_title: "PHASE 01",
+      s1_desc: "LOAD CALCULATIONS & PROJECTIONS",
+      s2_title: "PHASE 02",
+      s2_desc: "HARDWARE ARMORING & ARRAY ALIGNMENT",
+      s3_title: "PHASE 03",
+      s3_desc: "FULL GRIDS INDEPENDENCE RECORDED",
     },
   },
   ar: {
@@ -182,39 +179,43 @@ const dictionaries: { en: Dictionary; ar: Dictionary } = {
       cta: "ابدأ الآن",
     },
     hero: {
-      title1: "امـتـلـك",
-      title2: "الطاقة المستدامة",
+      title1: "طـاقـة مـسـتـقـلـة",
+      title2: "بديل للشبكة المترهلة",
       description:
-        "قوة حقيقية تلتقي مع الدقة الهندسية. نقدم أكثر منظومات الطاقة الشمسية متانة وتحملاً للبيئات القاسية في السودان. بدون تعقيدات، فقط كفاءة كهربائية عالية.",
-      cta_deploy: "تنفيذ المنظومة",
-      cta_view: "عرض الشبكة",
+        "تجاوز الانهيار المستمر في شبكة الكهرباء القومية. تؤمن أنظمة سودان سولار بنية تحتية ثقيلة وحلول طاقة شمسية استراتيجية لعزل منشأتك، مزرعتك، أو منزلك تماماً عن تذبذبات التيار. كهرباء مستقرة بلا انقطاع.",
+      cta_deploy: "دراسة جدوى النظام",
+      cta_view: "عرض حالة الشبكة",
     },
     stats: {
       uptime_val: "98.4%",
-      uptime_label: "كفاءة التشغيل",
+      uptime_label: "كفاءة المنظومات المستقلة",
       capacity_val: "12.5 GW",
-      capacity_label: "سعة الشبكة",
+      capacity_label: "السعة المركبة إقليمياً",
       latency_val: "0.02ms",
-      latency_label: "سرعة التحويل",
-      reliability_val: "INF",
-      reliability_label: "معدل الموثوقية",
+      latency_label: "التحويل التلقائي الآمن",
+      reliability_val: "مترهل",
+      reliability_label: "تقييم الشبكة القومية",
     },
     infrastructure: {
-      tag: "التقنية الأساسية",
-      title: "الهيكل الصناعي",
-      description: "أجهزة مصممة لتحمل التمدد الحراري وسرعة الرياح العالية.",
-      card1_title: "غلاف مدرع",
-      card1_desc: "قواعد خرسانية مدعمة بطبقات فولاذية لحماية المحولات.",
-      card1_f1: "مقاوم للماء IP68",
-      card1_f2: "درع حراري",
-      card2_title: "حقن مباشر",
-      card2_desc: "تكنولوجيا نقل طاقة بدون فاقد باستخدام كابلات نحاسية نقية.",
-      card2_f1: "مخرج 400V DC",
-      card2_f2: "موازنة فورية",
-      card3_title: "النواة المنطقية",
-      card3_desc: "وحدات معالجة مدمجة لفصل الأحمال تلقائياً والصيانة الوقائية.",
-      card3_f1: "معالجة طرفية",
-      card3_f2: "مزامنة بدون إنترنت",
+      tag: "عزل الشبكات",
+      title: "جدوى البديل المستدام",
+      description:
+        "لماذا لم تعد الطاقة الشمسية رفاهية، بل أصبحت البنية التحتية الأساسية والوحيدة لضمان استمرار الأعمال والاستقرار في السودان.",
+      card1_title: "استقلالية تامة",
+      card1_desc:
+        "اعزل منشأتك بالكامل عن قطوعات الكهرباء الطويلة وتذبذبات الجهد التي تدمر الأجهزة الحساسة.",
+      card1_f1: "جهد ثابت 24/7",
+      card1_f2: "أنظمة عزل ذكية",
+      card2_title: "تحمل حراري أقصى",
+      card2_desc:
+        "مصفوفات ألواح ومحولات مجهزة صناعياً للعمل بكفاءة قصوى حتى في درجات حرارة البيئة التي تتجاوز 50 مئوية.",
+      card2_f1: "تبريد تلقائي مدمج",
+      card2_f2: "مقاومة الأتربة الكثيفة",
+      card3_title: "الجدوى الاقتصادية",
+      card3_desc:
+        "استرداد كامل التكاليف الرأسمالية للمنظومة خلال عامين عبر التخلص النهائي من مصاريف وقود وصيانة المولدات.",
+      card3_f1: "صفر تكلفة وقود",
+      card3_f2: "عمر افتراضي ممتد",
     },
     pricing: {
       title: "اختر سعة المنظومة",
@@ -243,24 +244,21 @@ const dictionaries: { en: Dictionary; ar: Dictionary } = {
         "فخورون بتشغيل المنشآت الحيوية والزراعية بأعلى كفاءة في مختلف بقاع السودان.",
     },
     cta: {
-      title: "مستعد للتغيير؟",
+      title: "تريد تأمين طاقتك؟",
       subtitle:
-        "انضم لثورة البنية التحتية. اضمن استقلالية طاقتك اليوم مع أنظمة سودان سولار.",
+        "امتلك قرار شبكتك الكهربائية الآن واحذر خسائر انقطاع التيار المتكرر.",
       s1_title: "الخطوة 01",
-      s1_desc: "تقييم الموقع وتخطيط الشبكة",
+      s1_desc: "حساب الأحمال الكهربائية بدقة",
       s2_title: "الخطوة 02",
-      s2_desc: "تركيب المعدات والمزامنة",
+      s2_desc: "هندسة وتركيب المصفوفات والألواح",
       s3_title: "الخطوة 03",
-      s3_desc: "استقلالية تامة للشبكة",
+      s3_desc: "تفعيل الاستقلال التام للطاقة",
     },
   },
 };
 
 export default function Home() {
-  // Application State
   const [lang, setLang] = useState<"en" | "ar">("en");
-
-  // Set to true initially so the modal mounts open on first load without a cascading render
   const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
 
   const selectLanguage = (selectedLang: "en" | "ar") => {
@@ -274,43 +272,8 @@ export default function Home() {
   return (
     <div
       dir={isRtl ? "rtl" : "ltr"}
-      className={`min-h-screen bg-background text-on-background selection:bg-secondary-container selection:text-black ${
-        isRtl ? "font-arabic" : "font-body-md"
-      }`}
+      className={`w-full ${isRtl ? "font-arabic" : "font-body-md"}`}
     >
-      {/* 1. Header Navigation */}
-      <header className="bg-surface-container-lowest border-b-[4px] border-primary fixed top-0 left-0 w-full z-50 h-20">
-        <div className="flex justify-between items-center w-full px-4 md:px-10 h-full max-w-7xl mx-auto">
-          <div className="text-xl md:text-2xl font-black tracking-tighter text-primary">
-            {dict.nav.title}
-          </div>
-          <nav className="hidden md:flex gap-8 items-center h-full">
-            <a
-              className="text-primary font-bold border-b-2 border-primary pb-1 text-sm uppercase tracking-wider"
-              href="#"
-            >
-              {dict.nav.stations}
-            </a>
-            <a
-              className="text-on-surface-variant font-medium hover:bg-secondary-container px-2 py-1 text-sm uppercase tracking-wider transition-all"
-              href="#"
-            >
-              {dict.nav.metrics}
-            </a>
-            <a
-              className="text-on-surface-variant font-medium hover:bg-secondary-container px-2 py-1 text-sm uppercase tracking-wider transition-all"
-              href="#"
-            >
-              {dict.nav.infrastructure}
-            </a>
-          </nav>
-          <button className="bg-secondary-container text-primary font-bold border-[3px] border-primary px-4 md:px-6 py-2 shadow-neo hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all text-xs md:text-sm uppercase">
-            {dict.nav.cta}
-          </button>
-        </div>
-      </header>
-
-      {/* 2. Main Content Flow */}
       <main className="pt-20">
         <Hero dict={dict} />
         <StatsBar dict={dict} />
@@ -320,10 +283,7 @@ export default function Home() {
         <CTA dict={dict} />
       </main>
 
-      {/* 3. Footer */}
-      <Footer />
-
-      {/* 4. Language Gate Modal */}
+      {/* Language Modal */}
       {isModalOpen && (
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
@@ -339,20 +299,18 @@ export default function Home() {
               تفضيلات اللغة / Language
             </h2>
             <p className="text-on-surface-variant text-sm mb-6 font-medium">
-              الرجاء اختيار لغة تصفح موقع سودان سولار لإعداد البنى التحتية
-              للمنظومات الشمسيّة.
+              الرجاء اختيار لغة تصفح موقع سودان سولار لإعداد البنى التحتية.
             </p>
-
             <div className="grid grid-cols-2 gap-4">
               <button
                 onClick={() => selectLanguage("ar")}
-                className="w-full py-3 bg-secondary-container text-primary font-bold border-[3px] border-primary shadow-neo hover:-translate-x-1 hover:-translate-y-1 active:translate-x-0 active:translate-y-0 transition-all text-base"
+                className="w-full py-3 bg-secondary-container text-primary font-bold border-[3px] border-primary shadow-neo hover:-translate-x-1 hover:-translate-y-1 transition-all text-base"
               >
                 المتابعة بالعربية
               </button>
               <button
                 onClick={() => selectLanguage("en")}
-                className="w-full py-3 bg-surface-container-lowest text-primary font-bold border-[3px] border-primary shadow-neo hover:-translate-x-1 hover:-translate-y-1 active:translate-x-0 active:translate-y-0 transition-all text-base font-sans"
+                className="w-full py-3 bg-surface-container-lowest text-primary font-bold border-[3px] border-primary shadow-neo hover:-translate-x-1 hover:-translate-y-1 transition-all text-base font-sans"
               >
                 English Version
               </button>
