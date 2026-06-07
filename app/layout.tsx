@@ -69,9 +69,13 @@ export default function RootLayout({
               </Link>
             </nav>
 
-            <button className="bg-secondary-container text-primary font-bold border-[3px] border-primary px-4 md:px-6 py-2 shadow-neo text-xs md:text-sm uppercase">
+            {/* MODIFIED: Changed from button to Next.js Link for Scenario 01 */}
+            <Link
+              href="/calculator"
+              className="bg-secondary-container text-primary font-bold border-[3px] border-primary px-4 md:px-6 py-2 shadow-neo text-xs md:text-sm uppercase inline-block text-center hover:-translate-x-0.5 hover:-translate-y-0.5 transition-transform"
+            >
               ابدأ الآن
-            </button>
+            </Link>
           </div>
         </header>
 

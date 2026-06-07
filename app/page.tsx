@@ -5,7 +5,7 @@ import { Hero } from "../components/Hero";
 import { StatsBar } from "../components/StatsBar";
 import { Infrastructure } from "../components/Infrastructure";
 import { Pricing } from "../components/Pricing";
-import { ProjectsBanner } from "../components/ProjectsBanner";
+// import { ProjectsBanner } from "../components/ProjectsBanner";
 import { CTA } from "../components/CTA";
 
 interface Dictionary {
@@ -279,7 +279,7 @@ export default function Home() {
         <StatsBar dict={dict} />
         <Infrastructure dict={dict} />
         <Pricing dict={dict} />
-        <ProjectsBanner dict={dict} />
+        {/* <ProjectsBanner dict={dict} /> */}
         <CTA dict={dict} />
       </main>
 
