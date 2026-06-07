@@ -278,7 +278,7 @@ export default function Home() {
         <Hero dict={dict} />
         <StatsBar dict={dict} />
         <Infrastructure dict={dict} />
-        <Pricing dict={dict} />
+        <Pricing /> {/* قمنا بإزالة الـ dict لأن المكون لم يعد يحتاجه */}
         {/* <ProjectsBanner dict={dict} /> */}
         <CTA dict={dict} />
       </main>
