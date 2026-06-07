@@ -52,24 +52,46 @@ interface Dictionary {
   };
   pricing: {
     title: string;
-    t1_model: string;
-    t1_cap: string;
+    subtitle: string;
+    t1_badge: string;
+    t1_title: string;
+    t1_specs: string; // تمت الإضافة هنا
     t1_desc: string;
-    t1_btn: string;
+    t1_f1: string;
+    t1_f2: string;
+    t1_f3: string;
+    t1_f4: string;
+    t1_f5: string;
+    t1_wa: string;
     t2_badge: string;
-    t2_model: string;
-    t2_cap: string;
+    t2_tag: string;
+    t2_title: string;
+    t2_specs: string; // تمت الإضافة هنا
     t2_desc: string;
-    t2_btn: string;
-    t3_model: string;
-    t3_cap: string;
+    t2_f1: string;
+    t2_f1_tag: string;
+    t2_f2: string;
+    t2_f3: string;
+    t2_f4: string;
+    t2_f5: string;
+    t2_wa: string;
+    t3_badge: string;
+    t3_title: string;
+    t3_specs: string; // تمت الإضافة هنا
     t3_desc: string;
-    t3_btn: string;
-    lbl_capacity: string;
-    lbl_storage: string;
-    lbl_warranty: string;
-    lbl_logic: string;
-    lbl_monitoring: string;
+    t3_f1: string;
+    t3_f1_tag: string;
+    t3_f2: string;
+    t3_f3: string;
+    t3_f4: string;
+    t3_f5: string;
+    t3_wa: string;
+    btn_order: string;
+    calc_title: string;
+    calc_desc: string;
+    calc_btn: string;
+    lbl_specs: string;
+    lbl_devices: string;
   };
   projects: { title: string; subtitle: string };
   cta: {
@@ -133,25 +155,53 @@ const dictionaries: { en: Dictionary; ar: Dictionary } = {
       card3_f2: "PREDICTIVE LIFE CYCLE",
     },
     pricing: {
-      title: "SELECT UNIT CAPACITY",
-      t1_model: "MODEL: ALPHA-01",
-      t1_cap: "5kW",
-      t1_desc: "Base industrial unit for single-terminal operations.",
-      t1_btn: "GET QUOTE",
-      t2_badge: "MOST POPULAR",
-      t2_model: "MODEL: DELTA-05",
-      t2_cap: "15kW",
-      t2_desc: "Standard operator array for field-ready grid infrastructure.",
-      t2_btn: "ORDER NOW",
-      t3_model: "MODEL: OMEGA-GRID",
-      t3_cap: "50kW+",
-      t3_desc: "Custom high-density arrays for regional distribution.",
-      t3_btn: "CONSULT TEAM",
-      lbl_capacity: "CAPACITY",
-      lbl_storage: "STORAGE",
-      lbl_warranty: "WARRANTY",
-      lbl_logic: "AI LOGIC",
-      lbl_monitoring: "MONITORING",
+      title: "Ready Residential Packages",
+      subtitle:
+        "Choose the package that fits your home's consumption. All packages are engineered to withstand Sudan's extreme temperatures.",
+      lbl_specs: "Engineering Specs:",
+      lbl_devices: "Devices Powered by this Package:",
+      btn_order: "Order via WhatsApp",
+
+      t1_badge: "Essential Package",
+      t1_title: "Tier 1",
+      t1_specs: "", // حقل إضافي ليتطابق مع الواجهة
+      t1_desc: "4.2kW Inverter | 5kWh Battery | 4 Solar Panels",
+      t1_f1: "Standard Refrigerator (24/7)",
+      t1_f2: "Water Cooler (Nesma)",
+      t1_f3: "3 to 4 Ceiling Fans",
+      t1_f4: "TV Screen + Internet Router",
+      t1_f5: "Full Home Lighting",
+      t1_wa: "Tier 1 - Essential",
+
+      t2_badge: "Family Package",
+      t2_tag: "Most Popular & Best Seller",
+      t2_title: "Tier 2",
+      t2_specs: "", // حقل إضافي ليتطابق مع الواجهة
+      t2_desc: "6.0kW Inverter | 10kWh Battery | 6 Solar Panels",
+      t2_f1: "A/C Split Unit (1.5 Ton)",
+      t2_f1_tag: "Day/Night",
+      t2_f2: "Standard Refrigerator (24/7)",
+      t2_f3: "Additional Water Cooler",
+      t2_f4: "Water Pump (Siphon)",
+      t2_f5: "Washing Machine + Fans & TVs",
+      t2_wa: "Tier 2 - Family",
+
+      t3_badge: "Luxury & Extended Runtime",
+      t3_title: "Tier 3",
+      t3_specs: "", // حقل إضافي ليتطابق مع الواجهة
+      t3_desc: "6.0kW Inverter | 15kWh Battery | 8 Solar Panels",
+      t3_f1: "Two A/C Split Units",
+      t3_f1_tag: "Alternating",
+      t3_f2: "Deep Freezer + Refrigerator (24/7)",
+      t3_f3: "Extended Night Operation (Massive Battery)",
+      t3_f4: "Water Pump & Ironing",
+      t3_f5: "All Essentials (TVs, Fans, Lighting)",
+      t3_wa: "Tier 3 - Luxury",
+
+      calc_title: "Different loads or a commercial/agricultural facility?",
+      calc_desc:
+        "Don't rely on guesswork. Use our smart load calculator to build a custom package matched exactly to your wattage needs.",
+      calc_btn: "Build Custom Package Now",
     },
     projects: {
       title: "ESTABLISHED OPERATIONAL STATIONS",
@@ -218,25 +268,53 @@ const dictionaries: { en: Dictionary; ar: Dictionary } = {
       card3_f2: "عمر افتراضي ممتد",
     },
     pricing: {
-      title: "اختر سعة المنظومة",
-      t1_model: "الموديل: ALPHA-01",
-      t1_cap: "5kW",
-      t1_desc: "وحدة صناعية أساسية للمنشآت المستقلة المحدودة.",
-      t1_btn: "اطلب تسعيرة",
-      t2_badge: "الأكثر طلباً",
-      t2_model: "الموديل: DELTA-05",
-      t2_cap: "15kW",
-      t2_desc: "منظومة قياسية جاهزة للتشغيل الميداني للمنازل الكبيرة.",
-      t2_btn: "اطلب الآن",
-      t3_model: "الموديل: OMEGA-GRID",
-      t3_cap: "+50kW",
-      t3_desc: "مصفوفات طاقة مخصصة للمزارع والمشاريع الكبرى.",
-      t3_btn: "استشر فريقنا",
-      lbl_capacity: "السعة",
-      lbl_storage: "التخزين",
-      lbl_warranty: "الضمان",
-      lbl_logic: "الذكاء الاصطناعي",
-      lbl_monitoring: "المراقبة",
+      title: "الباقات السكنية الجاهزة",
+      subtitle:
+        "اختر الباقة التي تناسب حجم استهلاك منزلك. جميع الباقات مصممة لتحمل درجات الحرارة العالية في السودان.",
+      lbl_specs: "المواصفات الهندسية:",
+      lbl_devices: "الأجهزة التي تشغلها الباقة:",
+      btn_order: "طلب الباقة عبر الواتساب",
+
+      t1_badge: "باقة الأساسيات",
+      t1_title: "الباقة الأولى",
+      t1_specs: "", // حقل إضافي ليتطابق مع الواجهة
+      t1_desc: "انفرتر 4.2kW | بطارية 5kWh | 4 ألواح شمسية",
+      t1_f1: "ثلاجة عادية (تعمل 24 ساعة)",
+      t1_f2: "مكيف ماء (نسمة/الرشيد)",
+      t1_f3: "3 إلى 4 مراوح سقف",
+      t1_f4: "شاشة تلفزيون + إنترنت",
+      t1_f5: "إضاءة المنزل بالكامل",
+      t1_wa: "الباقة الأولى - الأساسيات",
+
+      t2_badge: "باقة العائلة",
+      t2_tag: "الأكثر طلباً ومبيعاً",
+      t2_title: "الباقة الثانية",
+      t2_specs: "", // حقل إضافي ليتطابق مع الواجهة
+      t2_desc: "انفرتر 6.0kW | بطارية 10kWh | 6 ألواح شمسية",
+      t2_f1: "مكيف فريون (1.5 طن)",
+      t2_f1_tag: "نهاري/مسائي",
+      t2_f2: "ثلاجة عادية (تعمل 24 ساعة)",
+      t2_f3: "مكيف ماء إضافي",
+      t2_f4: "موتور مياه (سايفون)",
+      t2_f5: "غسالة ملابس + مراوح وشاشات",
+      t2_wa: "الباقة الثانية - العائلة (الأكثر طلباً)",
+
+      t3_badge: "باقة الرفاهية والتشغيل الممتد",
+      t3_title: "الباقة الثالثة",
+      t3_specs: "", // حقل إضافي ليتطابق مع الواجهة
+      t3_desc: "انفرتر 6.0kW | بطارية 15kWh | 8 ألواح شمسية",
+      t3_f1: "مكيفين فريون",
+      t3_f1_tag: "بالتناوب",
+      t3_f2: "ديب فريزر + ثلاجة (24 ساعة)",
+      t3_f3: "تشغيل ليلي ممتد بفضل البطارية الضخمة",
+      t3_f4: "موتور مياه ومكواة غسيل",
+      t3_f5: "كافة الأساسيات (شاشات، مراوح، إضاءة)",
+      t3_wa: "الباقة الثالثة - الرفاهية",
+
+      calc_title: "أحمالك مختلفة أو لديك منشأة تجارية/زراعية؟",
+      calc_desc:
+        "لا تعتمد على التخمين. استخدم حاسبة الأحمال الذكية لإنشاء باقة مخصصة ومطابقة لاحتياجك الفعلي بالواط.",
+      calc_btn: "بناء باقة مخصصة الآن",
     },
     projects: {
       title: "مشاريعنا السابقة",
@@ -258,7 +336,7 @@ const dictionaries: { en: Dictionary; ar: Dictionary } = {
 };
 
 export default function Home() {
-  const [lang, setLang] = useState<"en" | "ar">("en");
+  const [lang, setLang] = useState<"en" | "ar">("ar");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
 
   const selectLanguage = (selectedLang: "en" | "ar") => {
@@ -278,7 +356,7 @@ export default function Home() {
         <Hero dict={dict} />
         <StatsBar dict={dict} />
         <Infrastructure dict={dict} />
-        <Pricing /> {/* قمنا بإزالة الـ dict لأن المكون لم يعد يحتاجه */}
+        <Pricing dict={dict} isRtl={isRtl} />
         {/* <ProjectsBanner dict={dict} /> */}
         <CTA dict={dict} />
       </main>

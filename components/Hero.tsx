@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Link from "next/link"; // استيراد Link للتنقل السلس والذكي في Next.js
 
 // Define the exact shape of the translation dictionary object
 interface TranslationDict {
@@ -17,8 +18,19 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ dict }) => {
+  // فحص ذكي لتحديد لغة التصفح الحالية لتقديم أفضل العناوين التسويقية (High-Conversion Labels)
+  const isArabic = dict.hero.title1.includes("طـاقـة");
+
+  // العناوين الجديدة المحسّنة لتجربة مستخدم خارقة (UX)
+  const primaryLabel = isArabic
+    ? "احسب أحمال منزلك وابدأ الآن"
+    : "Calculate Your Loads & Start";
+  const secondaryLabel = isArabic
+    ? "تصفح الباقات السكنية الجاهزة"
+    : "View Ready Solar Packages";
+
   return (
-    // Changed to h-[calc(100dvh-80px)] to fit the exact remaining screen height and prevent layout scrolling
+    // Height optimized to h-[calc(100dvh-80px)] to perfectly eliminate initial layout scrolling
     <section className="relative h-[calc(100dvh-80px)] w-full flex items-center overflow-hidden border-b-[6px] border-primary bg-black">
       {/* 1. Background Video Segment */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none">
@@ -38,12 +50,11 @@ export const Hero: React.FC<HeroProps> = ({ dict }) => {
         {/* Dark solid overlay for contrast */}
         <div className="absolute inset-0 bg-primary/30"></div>
 
-        {/* NEW: Deep bottom shadow gradient to seamlessly mask and hide the Gemini watermark */}
+        {/* Deep bottom shadow gradient to seamlessly mask and hide the Gemini watermark */}
         <div className="absolute bottom-0 left-0 w-full h-28 bg-gradient-to-t from-black via-black/95 to-transparent z-10" />
       </div>
 
       {/* 2. Hero Content */}
-      {/* Adjusted padding (py-6 md:py-10) to optimize space and keep everything visible on smaller screens */}
       <div className="relative z-10 w-full px-4 md:px-10 py-6 md:py-10 max-w-7xl mx-auto flex items-center h-full">
         <div className="max-w-4xl flex flex-col gap-4 md:gap-6 text-right rtl:text-right ltr:text-left w-full">
           <h1 className="font-black text-4xl md:text-6xl lg:text-7xl uppercase leading-[1.1] tracking-tighter text-white drop-shadow-md">
@@ -59,20 +70,58 @@ export const Hero: React.FC<HeroProps> = ({ dict }) => {
             </p>
           </div>
 
-          {/* Action Buttons - Now guaranteed to be above the fold */}
+          {/* Action Buttons - OPTIMIZED HIGH-CONVERSION UX */}
           <div className="flex flex-wrap gap-4 mt-2">
-            <button className="bg-secondary-container text-primary font-black border-[4px] border-primary px-6 md:px-8 py-3 md:py-4 text-xs md:text-base transition-transform hover:-translate-y-1 hover:-translate-x-1 hover:shadow-neo-gold-lg active:translate-x-0 active:translate-y-0 active:shadow-none shadow-neo-gold shadow-black uppercase italic">
-              {dict.hero.cta_deploy}
-            </button>
-            <button className="bg-surface-container-lowest text-primary font-black border-[4px] border-primary px-6 md:px-8 py-3 md:py-4 text-xs md:text-base transition-transform hover:-translate-y-1 hover:-translate-x-1 hover:shadow-neo-lg active:translate-x-0 active:translate-y-0 active:shadow-none shadow-neo shadow-black uppercase">
-              {dict.hero.cta_view}
-            </button>
+            {/* Primary Action: Directs the user to the interactive load calculator page */}
+            <Link
+              href="/calculator"
+              className="bg-secondary-container text-primary font-black border-[4px] border-primary px-6 md:px-8 py-3 md:py-4 text-xs md:text-base transition-transform hover:-translate-y-1 hover:-translate-x-1 hover:shadow-neo-gold-lg active:translate-x-0 active:translate-y-0 active:shadow-none shadow-neo-gold shadow-black uppercase italic flex items-center gap-2 group"
+            >
+              <span>{primaryLabel}</span>
+              {/* Dynamic arrow that shifts on hover to prompt an action */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 ltr:rotate-0 rtl:rotate-180 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={3}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                />
+              </svg>
+            </Link>
+
+            {/* Secondary Action: Triggers a smooth scroll to the pricing anchor on the same page */}
+            <Link
+              href="#pricing-section"
+              className="bg-surface-container-lowest text-primary font-black border-[4px] border-primary px-6 md:px-8 py-3 md:py-4 text-xs md:text-base transition-transform hover:-translate-y-1 hover:-translate-x-1 hover:shadow-neo-lg active:translate-x-0 active:translate-y-0 active:shadow-none shadow-neo shadow-black uppercase flex items-center gap-2 group"
+            >
+              {/* Package/Grid Box icon to give context before clicking */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 text-primary group-hover:scale-110 transition-transform"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2.5}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                />
+              </svg>
+              <span>{secondaryLabel}</span>
+            </Link>
           </div>
         </div>
       </div>
 
       {/* Absolute Bottom Corner Accent */}
-      {/* Moved up slightly (bottom-16) to clear the bottom watermark masking area beautifully */}
       <div className="absolute bottom-16 right-12 rtl:left-12 rtl:right-auto bg-secondary-container p-5 border-[4px] border-primary shadow-neo-lg z-20 hidden lg:flex items-center justify-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"

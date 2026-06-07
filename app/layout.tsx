@@ -27,7 +27,10 @@ export default function RootLayout({
   const pathname = usePathname();
 
   return (
-    <html lang="ar" className={`${montserrat.variable} ${cairo.variable}`}>
+    <html
+      lang="ar"
+      className={`scroll-smooth ${montserrat.variable} ${cairo.variable}`}
+    >
       <head>
         <link
           rel="stylesheet"

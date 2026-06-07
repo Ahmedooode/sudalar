@@ -14,22 +14,22 @@ interface LoadItem {
 export const LoadCalculator: React.FC = () => {
   const [sector, setSector] = useState<Sector>("residential");
   const [step, setStep] = useState<1 | 2 | 3>(1);
-  // Pre-defined customized loads tailored for Sudan's actual environment
+
+  // تصفير جميع الكميات (quantity: 0) مع الاحتفاظ بالقيم الافتراضية للواط والساعات
   const [residentialLoads, setResidentialLoads] = useState<LoadItem[]>([
-    { name: "مكيف ماء (نسمة)", watts: 300, quantity: 2, hours: 12 },
+    { name: "مكيف ماء (نسمة)", watts: 300, quantity: 0, hours: 12 },
     { name: "مكيف فريون (سبليت 1.5 طن)", watts: 1500, quantity: 0, hours: 6 },
-    { name: "ثلاجة أو ديب فريزر", watts: 250, quantity: 1, hours: 24 },
-    { name: "مروحة سقف / عمودية", watts: 80, quantity: 4, hours: 18 },
-    { name: "إضاءة عامة وشاشات", watts: 120, quantity: 1, hours: 8 },
-    { name: "مضخة مياه (موتور)", watts: 750, quantity: 1, hours: 1 },
-    // الإضافات السكنية الجديدة الهامة:
+    { name: "ثلاجة أو ديب فريزر", watts: 250, quantity: 0, hours: 24 },
+    { name: "مروحة سقف / عمودية", watts: 80, quantity: 0, hours: 18 },
+    { name: "إضاءة عامة وشاشات", watts: 120, quantity: 0, hours: 8 },
+    { name: "مضخة مياه (موتور)", watts: 750, quantity: 0, hours: 1 },
     { name: "مكواة ملابس (استخدام متقطع)", watts: 1500, quantity: 0, hours: 1 },
-    { name: "غسالة ملابس (حوضين/عادية)", watts: 400, quantity: 1, hours: 2 },
+    { name: "غسالة ملابس (حوضين/عادية)", watts: 400, quantity: 0, hours: 2 },
     { name: "غلاية مياه / مايكروويف", watts: 1500, quantity: 0, hours: 1 },
     {
       name: "إنترنت واتصالات (Starlink/راوتر)",
       watts: 70,
-      quantity: 1,
+      quantity: 0,
       hours: 24,
     },
   ]);
@@ -38,11 +38,11 @@ export const LoadCalculator: React.FC = () => {
     {
       name: "مضخة أعماق غاطسة (Submersible)",
       watts: 5500,
-      quantity: 1,
+      quantity: 0,
       hours: 6,
-    }, // ~7.5 HP
+    },
     { name: "منظومة تقليب وتسميد زراعي", watts: 1100, quantity: 0, hours: 4 },
-    { name: "إضاءة غرف الحرس والمخازن", watts: 150, quantity: 1, hours: 10 },
+    { name: "إضاءة غرف الحرس والمخازن", watts: 150, quantity: 0, hours: 10 },
     { name: "مبرد تمور أو حظائر", watts: 2200, quantity: 0, hours: 12 },
   ]);
 
@@ -50,15 +50,15 @@ export const LoadCalculator: React.FC = () => {
     {
       name: "مكيفات فريون (واجهات ومحلات)",
       watts: 2000,
-      quantity: 2,
+      quantity: 0,
       hours: 10,
     },
-    { name: "إضاءة لوحات إعلانية وداخلية", watts: 400, quantity: 1, hours: 12 },
-    { name: "ثلاجة عرض وتبريد بضائع", watts: 600, quantity: 2, hours: 24 },
+    { name: "إضاءة لوحات إعلانية وداخلية", watts: 400, quantity: 0, hours: 12 },
+    { name: "ثلاجة عرض وتبريد بضائع", watts: 600, quantity: 0, hours: 24 },
     {
       name: "أنظمة محاسبة، سيرفر وكاميرات",
       watts: 350,
-      quantity: 1,
+      quantity: 0,
       hours: 14,
     },
   ]);
@@ -78,7 +78,6 @@ export const LoadCalculator: React.FC = () => {
     else setCommercialLoads(updated);
   };
 
-  // Calculations based on standard Sudan solar profiles (Peak sun hours around 5.5 hours)
   const calculateResults = () => {
     let totalDailyWh = 0;
     let peakConnectedWatts = 0;
@@ -92,13 +91,10 @@ export const LoadCalculator: React.FC = () => {
     });
 
     const totalKwh = totalDailyWh / 1000;
-    // Recommended inverter size with 30% safety factor for starting currents
     const recommendedInverterKw = parseFloat(
       ((peakConnectedWatts * 1.3) / 1000).toFixed(1),
     );
-    // Recommended solar array size (assuming 5.5 hours of average peak production in Sudan)
     const recommendedSolarKw = parseFloat(((totalKwh / 5.5) * 1.25).toFixed(1));
-    // Battery storage needs (rough estimation for night backup based on 60% of total load)
     const recommendedBatteryKwh = parseFloat((totalKwh * 0.6).toFixed(1));
 
     return {
@@ -111,9 +107,8 @@ export const LoadCalculator: React.FC = () => {
 
   const results = calculateResults();
 
-  // Generate customized WhatsApp text for action conversion
   const getWhatsAppLink = () => {
-    const phoneNumber = "249123766000"; // استبدل هذا برقم واتساب شركة سودا لار الفعلي
+    const phoneNumber = "249123766000";
     const sectorAr =
       sector === "residential"
         ? "سكني"
@@ -245,19 +240,16 @@ export const LoadCalculator: React.FC = () => {
             </button>
           </div>
 
-          {/* Cards Grid Layout instead of a Table */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             {currentLoads.map((item, index) => (
               <div
                 key={index}
                 className="border-[3px] border-primary p-5 bg-surface-container-lowest shadow-neo flex flex-col gap-5 hover:-translate-y-1 transition-transform"
               >
-                {/* Card Header: Device Name */}
                 <div className="font-black text-primary text-lg md:text-xl border-b-[2px] border-primary/20 pb-2">
                   {item.name}
                 </div>
 
-                {/* Card Body: Controls */}
                 <div className="grid grid-cols-2 gap-4">
                   {/* Quantity Control */}
                   <div className="flex flex-col gap-1.5 col-span-2 sm:col-span-1">
@@ -279,12 +271,16 @@ export const LoadCalculator: React.FC = () => {
                       </button>
                       <input
                         type="number"
-                        value={item.quantity}
+                        /* التعديل هنا: إذا كانت القيمة 0 نجعلها نصاً فارغاً ونعتمد على البلايس هولدر */
+                        value={item.quantity === 0 ? "" : item.quantity}
+                        placeholder="0"
                         onChange={(e) =>
                           updateLoad(
                             index,
                             "quantity",
-                            Math.max(0, parseInt(e.target.value) || 0),
+                            e.target.value === ""
+                              ? 0
+                              : Math.max(0, parseInt(e.target.value) || 0),
                           )
                         }
                         className="w-full h-full text-center font-mono font-black text-lg border-none outline-none focus:bg-secondary-container"
@@ -309,15 +305,19 @@ export const LoadCalculator: React.FC = () => {
                       type="number"
                       max="24"
                       min="0"
-                      value={item.hours}
+                      /* التعديل هنا لتجنب مشكلة الصفر المزعج */
+                      value={item.hours === 0 ? "" : item.hours}
+                      placeholder="0"
                       onChange={(e) =>
                         updateLoad(
                           index,
                           "hours",
-                          Math.min(
-                            24,
-                            Math.max(0, parseInt(e.target.value) || 0),
-                          ),
+                          e.target.value === ""
+                            ? 0
+                            : Math.min(
+                                24,
+                                Math.max(0, parseInt(e.target.value) || 0),
+                              ),
                         )
                       }
                       className="h-12 w-full bg-white border-[2px] border-primary p-2 text-center font-mono font-black text-lg focus:bg-secondary-container outline-none transition-colors"
@@ -331,12 +331,16 @@ export const LoadCalculator: React.FC = () => {
                     </span>
                     <input
                       type="number"
-                      value={item.watts}
+                      /* التعديل هنا أيضاً */
+                      value={item.watts === 0 ? "" : item.watts}
+                      placeholder="0"
                       onChange={(e) =>
                         updateLoad(
                           index,
                           "watts",
-                          parseInt(e.target.value) || 0,
+                          e.target.value === ""
+                            ? 0
+                            : parseInt(e.target.value) || 0,
                         )
                       }
                       className="h-12 w-full bg-surface-container-high border-[2px] border-primary p-2 text-center font-mono font-bold focus:bg-secondary-container outline-none transition-colors"
