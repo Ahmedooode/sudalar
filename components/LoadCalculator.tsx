@@ -4,62 +4,175 @@ import React, { useState } from "react";
 
 type Sector = "residential" | "agricultural" | "commercial";
 
+// تم فصل الساعات إلى نهارية وليلية لدقة هندسية أعلى
 interface LoadItem {
   name: string;
   watts: number;
   quantity: number;
-  hours: number;
+  hoursDay: number;
+  hoursNight: number;
 }
 
 export const LoadCalculator: React.FC = () => {
   const [sector, setSector] = useState<Sector>("residential");
   const [step, setStep] = useState<1 | 2 | 3>(1);
 
-  // تصفير جميع الكميات (quantity: 0) مع الاحتفاظ بالقيم الافتراضية للواط والساعات
+  // 1. القطاع السكني
   const [residentialLoads, setResidentialLoads] = useState<LoadItem[]>([
-    { name: "مكيف ماء (نسمة)", watts: 300, quantity: 0, hours: 12 },
-    { name: "مكيف فريون (سبليت 1.5 طن)", watts: 1500, quantity: 0, hours: 6 },
-    { name: "ثلاجة أو ديب فريزر", watts: 250, quantity: 0, hours: 24 },
-    { name: "مروحة سقف / عمودية", watts: 80, quantity: 0, hours: 18 },
-    { name: "إضاءة عامة وشاشات", watts: 120, quantity: 0, hours: 8 },
-    { name: "مضخة مياه (موتور)", watts: 750, quantity: 0, hours: 1 },
-    { name: "مكواة ملابس (استخدام متقطع)", watts: 1500, quantity: 0, hours: 1 },
-    { name: "غسالة ملابس (حوضين/عادية)", watts: 400, quantity: 0, hours: 2 },
-    { name: "غلاية مياه / مايكروويف", watts: 1500, quantity: 0, hours: 1 },
     {
-      name: "إنترنت واتصالات (Starlink/راوتر)",
+      name: "مكيف ماء (نسمة)",
+      watts: 300,
+      quantity: 0,
+      hoursDay: 4,
+      hoursNight: 8,
+    },
+    {
+      name: "مكيف فريون (سبليت 1.5 طن)",
+      watts: 1500,
+      quantity: 0,
+      hoursDay: 4,
+      hoursNight: 4,
+    },
+    {
+      name: "ثلاجة أو ديب فريزر",
+      watts: 250,
+      quantity: 0,
+      hoursDay: 12,
+      hoursNight: 12,
+    },
+    {
+      name: "مروحة سقف / عمودية",
+      watts: 80,
+      quantity: 0,
+      hoursDay: 6,
+      hoursNight: 12,
+    },
+    {
+      name: "إضاءة / لمبات (LED)",
+      watts: 15,
+      quantity: 0,
+      hoursDay: 0,
+      hoursNight: 8,
+    },
+    {
+      name: "شاشة تلفزيون وريسيفر",
+      watts: 100,
+      quantity: 0,
+      hoursDay: 4,
+      hoursNight: 6,
+    },
+    {
+      name: "مضخة مياه (موتور)",
+      watts: 750,
+      quantity: 0,
+      hoursDay: 1,
+      hoursNight: 0,
+    },
+    {
+      name: "مكواة ملابس",
+      watts: 1500,
+      quantity: 0,
+      hoursDay: 1,
+      hoursNight: 0,
+    },
+    {
+      name: "غسالة ملابس (حوضين)",
+      watts: 400,
+      quantity: 0,
+      hoursDay: 2,
+      hoursNight: 0,
+    },
+    {
+      name: "غلاية / مايكروويف",
+      watts: 1500,
+      quantity: 0,
+      hoursDay: 0,
+      hoursNight: 1,
+    },
+    {
+      name: "إنترنت (Starlink/راوتر)",
       watts: 70,
       quantity: 0,
-      hours: 24,
+      hoursDay: 12,
+      hoursNight: 12,
     },
   ]);
 
+  // 2. القطاع الزراعي
   const [agriculturalLoads, setAgriculturalLoads] = useState<LoadItem[]>([
     {
-      name: "مضخة أعماق غاطسة (Submersible)",
+      name: "مضخة غاطسة (Submersible)",
       watts: 5500,
       quantity: 0,
-      hours: 6,
+      hoursDay: 6,
+      hoursNight: 0,
     },
-    { name: "منظومة تقليب وتسميد زراعي", watts: 1100, quantity: 0, hours: 4 },
-    { name: "إضاءة غرف الحرس والمخازن", watts: 150, quantity: 0, hours: 10 },
-    { name: "مبرد تمور أو حظائر", watts: 2200, quantity: 0, hours: 12 },
+    {
+      name: "منظومة تقليب وتسميد",
+      watts: 1100,
+      quantity: 0,
+      hoursDay: 4,
+      hoursNight: 0,
+    },
+    {
+      name: "إضاءة غرف الحرس",
+      watts: 150,
+      quantity: 0,
+      hoursDay: 0,
+      hoursNight: 10,
+    },
+    {
+      name: "مبرد تمور أو حظائر",
+      watts: 2200,
+      quantity: 0,
+      hoursDay: 6,
+      hoursNight: 6,
+    },
   ]);
 
+  // 3. القطاع التجاري
   const [commercialLoads, setCommercialLoads] = useState<LoadItem[]>([
     {
-      name: "مكيفات فريون (واجهات ومحلات)",
+      name: "مكيفات فريون (محلات)",
       watts: 2000,
       quantity: 0,
-      hours: 10,
+      hoursDay: 8,
+      hoursNight: 2,
     },
-    { name: "إضاءة لوحات إعلانية وداخلية", watts: 400, quantity: 0, hours: 12 },
-    { name: "ثلاجة عرض وتبريد بضائع", watts: 600, quantity: 0, hours: 24 },
     {
-      name: "أنظمة محاسبة، سيرفر وكاميرات",
+      name: "إضاءة داخلية (لمبات LED)",
+      watts: 20,
+      quantity: 0,
+      hoursDay: 4,
+      hoursNight: 8,
+    },
+    {
+      name: "إضاءة لوحات إعلانية خارجية",
+      watts: 400,
+      quantity: 0,
+      hoursDay: 0,
+      hoursNight: 12,
+    },
+    {
+      name: "شاشات عرض تجارية",
+      watts: 150,
+      quantity: 0,
+      hoursDay: 8,
+      hoursNight: 6,
+    },
+    {
+      name: "ثلاجة عرض وتبريد",
+      watts: 600,
+      quantity: 0,
+      hoursDay: 12,
+      hoursNight: 12,
+    },
+    {
+      name: "أنظمة محاسبة وكاميرات",
       watts: 350,
       quantity: 0,
-      hours: 14,
+      hoursDay: 12,
+      hoursNight: 12,
     },
   ]);
 
@@ -78,24 +191,37 @@ export const LoadCalculator: React.FC = () => {
     else setCommercialLoads(updated);
   };
 
+  // الهندسة الجديدة: حساب منفصل لليل والنهار
   const calculateResults = () => {
-    let totalDailyWh = 0;
+    let totalDayWh = 0;
+    let totalNightWh = 0;
     let peakConnectedWatts = 0;
 
     currentLoads.forEach((item) => {
-      const itemDaily = item.watts * item.quantity * item.hours;
-      totalDailyWh += itemDaily;
       if (item.quantity > 0) {
+        // الاستهلاك النهاري
+        totalDayWh += item.watts * item.quantity * item.hoursDay;
+        // الاستهلاك الليلي
+        totalNightWh += item.watts * item.quantity * item.hoursNight;
+        // الحمل الأقصى اللحظي
         peakConnectedWatts += item.watts * item.quantity;
       }
     });
 
+    const totalDailyWh = totalDayWh + totalNightWh;
     const totalKwh = totalDailyWh / 1000;
+    const totalNightKwh = totalNightWh / 1000;
+
+    // العاكس: يتحمل كامل الحمل اللحظي + 30% أمان
     const recommendedInverterKw = parseFloat(
       ((peakConnectedWatts * 1.3) / 1000).toFixed(1),
     );
+
+    // الألواح: تغذي استهلاك النهار بالكامل + تشحن البطاريات لاستهلاك الليل (على 5.5 ساعات شمس)
     const recommendedSolarKw = parseFloat(((totalKwh / 5.5) * 1.25).toFixed(1));
-    const recommendedBatteryKwh = parseFloat((totalKwh * 0.6).toFixed(1));
+
+    // البطاريات: تحسب فقط لتغطية أحمال الليل، مقسومة على 0.8 (DoD لبطاريات الليثيوم 80%)
+    const recommendedBatteryKwh = parseFloat((totalNightKwh / 0.8).toFixed(1));
 
     return {
       totalKwh,
@@ -116,17 +242,17 @@ export const LoadCalculator: React.FC = () => {
           ? "زراعي"
           : "تجاري";
 
-    let message = `مرحباً سودا لار لطاقة الشمسية، لقد قمت بحساب الأحمال المبدئية عبر موقعكم لقطاع (*${sectorAr}*) وهي كالتالي:\n\n`;
+    let message = `مرحباً سودا لار للطاقة الشمسية، لقد قمت بحساب الأحمال المبدئية عبر موقعكم لقطاع (*${sectorAr}*) وهي كالتالي:\n\n`;
     currentLoads.forEach((item) => {
       if (item.quantity > 0) {
-        message += `• ${item.name}: العدد (${item.quantity}) - العمل (${item.hours} ساعة)\n`;
+        message += `• ${item.name}: العدد (${item.quantity}) - العمل (${item.hoursDay} نهاراً / ${item.hoursNight} ليلاً)\n`;
       }
     });
     message += `\n*التقرير الفني المقدر:*\n`;
     message += `- إجمالي الاستهلاك السنوي: ${results.totalKwh.toFixed(1)} كيلوواط/يوم\n`;
     message += `- حجم العاكس المقترح: ${results.recommendedInverterKw} كيلوواط\n`;
     message += `- حجم الألواح المقترح: ${results.recommendedSolarKw} كيلوواط\n`;
-    message += `- سعة التخزين المقترحة: ${results.recommendedBatteryKwh} كيلوواط/ساعة\n\n`;
+    message += `- سعة التخزين (لليل فقط): ${results.recommendedBatteryKwh} كيلوواط/ساعة\n\n`;
     message += `أرجو مراجعة التقرير وتزويدي بالتسعير المبدئي وتنسيق زيارة ميدانية للموقع المذكور.`;
 
     return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
@@ -219,7 +345,7 @@ export const LoadCalculator: React.FC = () => {
         </div>
       )}
 
-      {/* STEP 2: LOAD INPUTS GRID (CARD-BASED UX) */}
+      {/* STEP 2: LOAD INPUTS GRID */}
       {step === 2 && (
         <div className="flex flex-col gap-6 animate-fadeIn">
           <div className="bg-primary text-white p-6 border-[3px] border-primary shadow-neo flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -228,8 +354,8 @@ export const LoadCalculator: React.FC = () => {
                 تحديد كميات وساعات تشغيل الأجهزة
               </h2>
               <p className="text-sm text-gray-300 mt-1">
-                قم بتعديل العدد وساعات التشغيل لكل جهاز. (يمكنك تعديل القدرة
-                بالواط إذا لزم الأمر).
+                القدرة على فصل ساعات النهار عن الليل تضمن لك حساب بطاريات دقيق
+                جداً وبأقل تكلفة.
               </p>
             </div>
             <button
@@ -240,7 +366,7 @@ export const LoadCalculator: React.FC = () => {
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 gap-4 md:gap-6">
             {currentLoads.map((item, index) => (
               <div
                 key={index}
@@ -250,9 +376,9 @@ export const LoadCalculator: React.FC = () => {
                   {item.name}
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {/* Quantity Control */}
-                  <div className="flex flex-col gap-1.5 col-span-2 sm:col-span-1">
+                  <div className="flex flex-col gap-1.5 col-span-2 md:col-span-1">
                     <span className="text-xs font-bold text-gray-500 uppercase">
                       العدد الحالي
                     </span>
@@ -265,13 +391,12 @@ export const LoadCalculator: React.FC = () => {
                             Math.max(0, item.quantity - 1),
                           )
                         }
-                        className="w-12 h-full bg-gray-100 border-l border-primary font-black text-xl hover:bg-secondary-container active:bg-primary active:text-white transition-colors"
+                        className="w-10 h-full bg-gray-100 border-l border-primary font-black text-xl hover:bg-secondary-container active:bg-primary active:text-white transition-colors"
                       >
                         -
                       </button>
                       <input
                         type="number"
-                        /* التعديل هنا: إذا كانت القيمة 0 نجعلها نصاً فارغاً ونعتمد على البلايس هولدر */
                         value={item.quantity === 0 ? "" : item.quantity}
                         placeholder="0"
                         onChange={(e) =>
@@ -289,49 +414,20 @@ export const LoadCalculator: React.FC = () => {
                         onClick={() =>
                           updateLoad(index, "quantity", item.quantity + 1)
                         }
-                        className="w-12 h-full bg-gray-100 border-r border-primary font-black text-xl hover:bg-secondary-container active:bg-primary active:text-white transition-colors"
+                        className="w-10 h-full bg-gray-100 border-r border-primary font-black text-xl hover:bg-secondary-container active:bg-primary active:text-white transition-colors"
                       >
                         +
                       </button>
                     </div>
                   </div>
 
-                  {/* Hours Control */}
-                  <div className="flex flex-col gap-1.5 col-span-2 sm:col-span-1">
-                    <span className="text-xs font-bold text-gray-500 uppercase">
-                      ساعات التشغيل/يوم
-                    </span>
-                    <input
-                      type="number"
-                      max="24"
-                      min="0"
-                      /* التعديل هنا لتجنب مشكلة الصفر المزعج */
-                      value={item.hours === 0 ? "" : item.hours}
-                      placeholder="0"
-                      onChange={(e) =>
-                        updateLoad(
-                          index,
-                          "hours",
-                          e.target.value === ""
-                            ? 0
-                            : Math.min(
-                                24,
-                                Math.max(0, parseInt(e.target.value) || 0),
-                              ),
-                        )
-                      }
-                      className="h-12 w-full bg-white border-[2px] border-primary p-2 text-center font-mono font-black text-lg focus:bg-secondary-container outline-none transition-colors"
-                    />
-                  </div>
-
                   {/* Watts Control */}
-                  <div className="flex flex-col gap-1.5 col-span-2">
+                  <div className="flex flex-col gap-1.5 col-span-2 md:col-span-1">
                     <span className="text-xs font-bold text-gray-500 uppercase">
-                      القدرة (واط) للجهاز الواحد
+                      الواط لجهاز
                     </span>
                     <input
                       type="number"
-                      /* التعديل هنا أيضاً */
                       value={item.watts === 0 ? "" : item.watts}
                       placeholder="0"
                       onChange={(e) =>
@@ -345,6 +441,70 @@ export const LoadCalculator: React.FC = () => {
                       }
                       className="h-12 w-full bg-surface-container-high border-[2px] border-primary p-2 text-center font-mono font-bold focus:bg-secondary-container outline-none transition-colors"
                     />
+                  </div>
+
+                  {/* Hours Day Control */}
+                  <div className="flex flex-col gap-1.5 col-span-1 md:col-span-1">
+                    <span className="text-xs font-bold text-gray-500 uppercase">
+                      ساعات نهاراً
+                    </span>
+                    <div className="relative">
+                      <input
+                        type="number"
+                        max="12"
+                        min="0"
+                        value={item.hoursDay === 0 ? "" : item.hoursDay}
+                        placeholder="0"
+                        onChange={(e) =>
+                          updateLoad(
+                            index,
+                            "hoursDay",
+                            e.target.value === ""
+                              ? 0
+                              : Math.min(
+                                  12,
+                                  Math.max(0, parseInt(e.target.value) || 0),
+                                ),
+                          )
+                        }
+                        className="h-12 w-full bg-white border-[2px] border-primary p-2 text-center font-mono font-black text-lg focus:bg-secondary-container outline-none transition-colors"
+                      />
+                      <span className="absolute left-2 top-1/2 -translate-y-1/2 text-primary opacity-50 pointer-events-none material-symbols-outlined text-sm">
+                        light_mode
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Hours Night Control */}
+                  <div className="flex flex-col gap-1.5 col-span-1 md:col-span-1">
+                    <span className="text-xs font-bold text-gray-500 uppercase">
+                      ساعات ليلاً
+                    </span>
+                    <div className="relative">
+                      <input
+                        type="number"
+                        max="12"
+                        min="0"
+                        value={item.hoursNight === 0 ? "" : item.hoursNight}
+                        placeholder="0"
+                        onChange={(e) =>
+                          updateLoad(
+                            index,
+                            "hoursNight",
+                            e.target.value === ""
+                              ? 0
+                              : Math.min(
+                                  12,
+                                  Math.max(0, parseInt(e.target.value) || 0),
+                                ),
+                          )
+                        }
+                        className="h-12 w-full bg-white border-[2px] border-primary p-2 text-center font-mono font-black text-lg focus:bg-secondary-container outline-none transition-colors"
+                      />
+                      <span className="absolute left-2 top-1/2 -translate-y-1/2 text-primary opacity-50 pointer-events-none material-symbols-outlined text-sm">
+                        dark_mode
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -369,7 +529,7 @@ export const LoadCalculator: React.FC = () => {
         </div>
       )}
 
-      {/* STEP 3: RESULTS MATRIX & WHATSAPP REDIRECT */}
+      {/* STEP 3: RESULTS MATRIX */}
       {step === 3 && (
         <div className="flex flex-col gap-6 animate-fadeIn">
           <div className="bg-primary text-white p-6 border-[3px] border-primary shadow-neo">
@@ -377,12 +537,11 @@ export const LoadCalculator: React.FC = () => {
               التقرير الفني والحجم التقديري للمنظومة
             </h2>
             <p className="text-sm text-gray-300">
-              النتائج محسوبة وفقاً لمعايير الكفاءة والظروف المناخية وساعات ذروة
-              الشمس في السودان.
+              بفضل فصل أحمال النهار عن الليل، سعة البطاريات المعروضة هي السعة
+              الفعلية والمثالية المطلوبة.
             </p>
           </div>
 
-          {/* Output Matrix Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="border-[3px] border-primary p-6 bg-surface-container-lowest shadow-neo flex flex-col justify-between">
               <div>
@@ -395,7 +554,7 @@ export const LoadCalculator: React.FC = () => {
               </div>
               <div className="text-4xl font-mono font-black text-primary bg-surface-container p-4 border-[2px] border-primary text-center shadow-inner">
                 {results.totalKwh.toFixed(1)}{" "}
-                <span className="text-lg">كيلوواط/يوم</span>
+                <span className="text-lg">kWh/يوم</span>
               </div>
             </div>
 
@@ -410,7 +569,7 @@ export const LoadCalculator: React.FC = () => {
               </div>
               <div className="text-4xl font-mono font-black text-secondary-container bg-primary p-4 border-[2px] border-primary text-center shadow-inner">
                 {results.recommendedInverterKw}{" "}
-                <span className="text-lg text-white">كيلوواط</span>
+                <span className="text-lg text-white">kW</span>
               </div>
             </div>
 
@@ -420,32 +579,33 @@ export const LoadCalculator: React.FC = () => {
                   SOLAR PV ARRAY
                 </span>
                 <h4 className="font-black text-xl mb-4">
-                  الحد الأدنى لإنتاج الألواح المطلوبة
+                  قدرة مصفوفة الألواح المطلوبة
                 </h4>
               </div>
               <div className="text-4xl font-mono font-black text-primary bg-secondary-container p-4 border-[2px] border-primary text-center shadow-neo">
-                {results.recommendedSolarKw}{" "}
-                <span className="text-lg">كيلوواط ذروة</span>
+                {results.recommendedSolarKw} <span className="text-lg">kW</span>
               </div>
             </div>
 
-            <div className="border-[3px] border-primary p-6 bg-surface-container-lowest shadow-neo flex flex-col justify-between">
+            <div className="border-[3px] border-primary p-6 bg-surface-container-lowest shadow-neo flex flex-col justify-between relative overflow-hidden">
+              <div className="absolute -left-10 top-4 bg-secondary-container text-primary text-[10px] font-black px-10 py-1 rotate-[-45deg] uppercase">
+                مُحسن لليل
+              </div>
               <div>
                 <span className="font-mono text-xs uppercase text-gray-500 block mb-1">
-                  BATTERY BANK REQ
+                  LITHIUM BATTERY BANK
                 </span>
                 <h4 className="font-black text-xl mb-4">
-                  سعة التخزين والبطاريات التقديرية
+                  سعة بطاريات الليثيوم المقترحة
                 </h4>
               </div>
               <div className="text-4xl font-mono font-black text-gray-700 bg-surface-container p-4 border-[2px] border-primary text-center shadow-inner">
                 {results.recommendedBatteryKwh}{" "}
-                <span className="text-lg">كيلوواط/ساعة</span>
+                <span className="text-lg">kWh</span>
               </div>
             </div>
           </div>
 
-          {/* Action Area: WhatsApp Trigger */}
           <div className="mt-4 border-[4px] border-primary bg-secondary-container p-6 md:p-8 shadow-neo-lg shadow-black flex flex-col gap-6">
             <div className="text-primary">
               <h3 className="font-black text-2xl md:text-3xl uppercase mb-2">
@@ -454,8 +614,7 @@ export const LoadCalculator: React.FC = () => {
               <p className="text-sm md:text-base font-bold leading-relaxed">
                 اضغط على الزر أدناه لنقل كافة البيانات الحسابية التي قمت
                 بإدخالها مباشرة إلى المهندسين المختصين في شركة *سودا لار* عبر
-                الواتساب، للحصول على عرض أسعار فني ومالي مخصص ومطابق للمواصفات
-                المطلوبة فوراً.
+                الواتساب.
               </p>
             </div>
 
