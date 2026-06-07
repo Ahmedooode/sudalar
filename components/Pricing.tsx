@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export const Pricing: React.FC = () => {
   // قم بتغيير هذا الرقم إلى رقم مبيعات الشركة الفعلي
-  const WHATSAPP_NUMBER = "249912345678";
+  const WHATSAPP_NUMBER = "249123766000";
 
   const getWhatsAppLink = (packageName: string) => {
     const message = `مرحباً سودا لار، أريد الاستفسار وطلب (*${packageName}*) للوحدات السكنية. الرجاء تزويدي بعرض السعر المالي وتفاصيل التركيب.`;
