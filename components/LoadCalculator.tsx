@@ -2,146 +2,486 @@
 
 import React, { useState } from "react";
 
-// Strict structure for appliance consumption attributes
-interface ApplianceItem {
-  id: string;
-  nameAr: string;
-  nameEn: string;
+type Sector = "residential" | "agricultural" | "commercial";
+
+interface LoadItem {
+  name: string;
   watts: number;
-  count: number;
+  quantity: number;
+  hours: number;
 }
 
 export const LoadCalculator: React.FC = () => {
-  const [appliances, setAppliances] = useState<ApplianceItem[]>([
+  const [sector, setSector] = useState<Sector>("residential");
+  const [step, setStep] = useState<1 | 2 | 3>(1);
+  // Pre-defined customized loads tailored for Sudan's actual environment
+  const [residentialLoads, setResidentialLoads] = useState<LoadItem[]>([
+    { name: "مكيف ماء (نسمة)", watts: 300, quantity: 2, hours: 12 },
+    { name: "مكيف فريون (سبليت 1.5 طن)", watts: 1500, quantity: 0, hours: 6 },
+    { name: "ثلاجة أو ديب فريزر", watts: 250, quantity: 1, hours: 24 },
+    { name: "مروحة سقف / عمودية", watts: 80, quantity: 4, hours: 18 },
+    { name: "إضاءة عامة وشاشات", watts: 120, quantity: 1, hours: 8 },
+    { name: "مضخة مياه (موتور)", watts: 750, quantity: 1, hours: 1 },
+    // الإضافات السكنية الجديدة الهامة:
+    { name: "مكواة ملابس (استخدام متقطع)", watts: 1500, quantity: 0, hours: 1 },
+    { name: "غسالة ملابس (حوضين/عادية)", watts: 400, quantity: 1, hours: 2 },
+    { name: "غلاية مياه / مايكروويف", watts: 1500, quantity: 0, hours: 1 },
     {
-      id: "ac_freon",
-      nameAr: "مكيف فريون (1.5 طن)",
-      nameEn: "AC Freon 1.5 TON",
-      watts: 2000,
-      count: 0,
-    },
-    {
-      id: "ac_desert",
-      nameAr: "مكيف صحراوي",
-      nameEn: "Desert Air Cooler",
-      watts: 400,
-      count: 0,
-    },
-    {
-      id: "fridge",
-      nameAr: "ثلاجة / ديب فريزر",
-      nameEn: "Refrigerator/Freezer",
-      watts: 350,
-      count: 0,
-    },
-    {
-      id: "tv",
-      nameAr: "شاشة تلفزيون",
-      nameEn: "Television Set",
-      watts: 100,
-      count: 0,
-    },
-    {
-      id: "fans_lights",
-      nameAr: "مراوح وإضاءة (مجموعة غرف)",
-      nameEn: "Fans & Lighting Network",
-      watts: 300,
-      count: 0,
+      name: "إنترنت واتصالات (Starlink/راوتر)",
+      watts: 70,
+      quantity: 1,
+      hours: 24,
     },
   ]);
 
-  const updateCount = (id: string, delta: number) => {
-    setAppliances((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? { ...item, count: Math.max(0, item.count + delta) }
-          : item,
-      ),
-    );
+  const [agriculturalLoads, setAgriculturalLoads] = useState<LoadItem[]>([
+    {
+      name: "مضخة أعماق غاطسة (Submersible)",
+      watts: 5500,
+      quantity: 1,
+      hours: 6,
+    }, // ~7.5 HP
+    { name: "منظومة تقليب وتسميد زراعي", watts: 1100, quantity: 0, hours: 4 },
+    { name: "إضاءة غرف الحرس والمخازن", watts: 150, quantity: 1, hours: 10 },
+    { name: "مبرد تمور أو حظائر", watts: 2200, quantity: 0, hours: 12 },
+  ]);
+
+  const [commercialLoads, setCommercialLoads] = useState<LoadItem[]>([
+    {
+      name: "مكيفات فريون (واجهات ومحلات)",
+      watts: 2000,
+      quantity: 2,
+      hours: 10,
+    },
+    { name: "إضاءة لوحات إعلانية وداخلية", watts: 400, quantity: 1, hours: 12 },
+    { name: "ثلاجة عرض وتبريد بضائع", watts: 600, quantity: 2, hours: 24 },
+    {
+      name: "أنظمة محاسبة، سيرفر وكاميرات",
+      watts: 350,
+      quantity: 1,
+      hours: 14,
+    },
+  ]);
+
+  const currentLoads =
+    sector === "residential"
+      ? residentialLoads
+      : sector === "agricultural"
+        ? agriculturalLoads
+        : commercialLoads;
+
+  const updateLoad = (index: number, field: keyof LoadItem, value: number) => {
+    const updated = [...currentLoads];
+    updated[index] = { ...updated[index], [field]: value };
+    if (sector === "residential") setResidentialLoads(updated);
+    else if (sector === "agricultural") setAgriculturalLoads(updated);
+    else setCommercialLoads(updated);
   };
 
-  // Compute aggregated real-time baseline metrics
-  const totalPeakLoadWatts = appliances.reduce(
-    (sum, item) => sum + item.watts * item.count,
-    0,
-  );
-  const totalPeakLoadKw = (totalPeakLoadWatts / 1000).toFixed(2);
+  // Calculations based on standard Sudan solar profiles (Peak sun hours around 5.5 hours)
+  const calculateResults = () => {
+    let totalDailyWh = 0;
+    let peakConnectedWatts = 0;
 
-  // Derive estimated structural asset configuration requirement recommendations
-  const recommendedSystemSizeKw = Math.ceil(parseFloat(totalPeakLoadKw) * 1.35);
+    currentLoads.forEach((item) => {
+      const itemDaily = item.watts * item.quantity * item.hours;
+      totalDailyWh += itemDaily;
+      if (item.quantity > 0) {
+        peakConnectedWatts += item.watts * item.quantity;
+      }
+    });
+
+    const totalKwh = totalDailyWh / 1000;
+    // Recommended inverter size with 30% safety factor for starting currents
+    const recommendedInverterKw = parseFloat(
+      ((peakConnectedWatts * 1.3) / 1000).toFixed(1),
+    );
+    // Recommended solar array size (assuming 5.5 hours of average peak production in Sudan)
+    const recommendedSolarKw = parseFloat(((totalKwh / 5.5) * 1.25).toFixed(1));
+    // Battery storage needs (rough estimation for night backup based on 60% of total load)
+    const recommendedBatteryKwh = parseFloat((totalKwh * 0.6).toFixed(1));
+
+    return {
+      totalKwh,
+      recommendedInverterKw,
+      recommendedSolarKw,
+      recommendedBatteryKwh,
+    };
+  };
+
+  const results = calculateResults();
+
+  // Generate customized WhatsApp text for action conversion
+  const getWhatsAppLink = () => {
+    const phoneNumber = "249123766000"; // استبدل هذا برقم واتساب شركة سودا لار الفعلي
+    const sectorAr =
+      sector === "residential"
+        ? "سكني"
+        : sector === "agricultural"
+          ? "زراعي"
+          : "تجاري";
+
+    let message = `مرحباً سودا لار لطاقة الشمسية، لقد قمت بحساب الأحمال المبدئية عبر موقعكم لقطاع (*${sectorAr}*) وهي كالتالي:\n\n`;
+    currentLoads.forEach((item) => {
+      if (item.quantity > 0) {
+        message += `• ${item.name}: العدد (${item.quantity}) - العمل (${item.hours} ساعة)\n`;
+      }
+    });
+    message += `\n*التقرير الفني المقدر:*\n`;
+    message += `- إجمالي الاستهلاك السنوي: ${results.totalKwh.toFixed(1)} كيلوواط/يوم\n`;
+    message += `- حجم العاكس المقترح: ${results.recommendedInverterKw} كيلوواط\n`;
+    message += `- حجم الألواح المقترح: ${results.recommendedSolarKw} كيلوواط\n`;
+    message += `- سعة التخزين المقترحة: ${results.recommendedBatteryKwh} كيلوواط/ساعة\n\n`;
+    message += `أرجو مراجعة التقرير وتزويدي بالتسعير المبدئي وتنسيق زيارة ميدانية للموقع المذكور.`;
+
+    return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  };
 
   return (
-    <div className="bg-surface-container-lowest border-[4px] border-primary p-6 md:p-8 shadow-neo-lg text-right max-w-3xl mx-auto">
-      <div className="bg-primary text-white px-4 py-2 mb-6 border-b-[3px] border-primary inline-block font-mono text-xs uppercase">
-        LOAD CAP_BUILDER // V1.0
-      </div>
-
-      <h3 className="text-2xl font-black uppercase text-primary mb-2">
-        تخصيص وتقدير حجم المنظومة
-      </h3>
-      <p className="text-on-surface-variant text-sm mb-8">
-        قم بتحديد أعداد الأجهزة الكهربائية التي ترغب في تشغيلها لحساب ذروة الحمل
-        الكهربائي المطلوب لمنزلك أو منشأتك.
-      </p>
-
-      <div className="space-y-4 mb-8">
-        {appliances.map((app) => (
-          <div
-            key={app.id}
-            className="flex flex-col sm:flex-row items-center justify-between border-[2px] border-primary bg-surface-container-low p-4 gap-4"
-          >
-            <div className="text-center sm:text-right w-full sm:w-auto">
-              <div className="font-bold text-base text-primary">
-                {app.nameAr}
-              </div>
-              <div className="font-mono text-[11px] text-on-surface-variant">
-                {app.watts} WATTS BASE
-              </div>
-            </div>
-
-            {/* Tactile Counter Incrementor Buttons */}
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => updateCount(app.id, -1)}
-                className="w-10 h-10 bg-surface-container-lowest text-primary font-bold border-[2px] border-primary shadow-neo active:translate-x-0 active:translate-y-0 transition-transform font-mono"
-              >
-                -
-              </button>
-              <span className="font-data-display text-2xl text-primary w-12 text-center select-none bg-white py-1 border border-black/10">
-                {app.count}
-              </span>
-              <button
-                onClick={() => updateCount(app.id, 1)}
-                className="w-10 h-10 bg-secondary-container text-primary font-bold border-[2px] border-primary shadow-neo active:translate-x-0 active:translate-y-0 transition-transform font-mono"
-              >
-                +
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Industrial Read-out Telemetry Block */}
-      <div className="bg-primary text-white p-6 border-[3px] border-primary shadow-neo-gold text-center sm:text-right">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <div className="font-mono text-xs text-secondary-container uppercase tracking-wider mb-1">
-              TOTAL PEAK LOAD REQUIREMENT
-            </div>
-            <div className="font-data-display text-3xl text-white">
-              {totalPeakLoadKw} kW
-            </div>
-          </div>
-          <div className="border-t sm:border-t-0 sm:border-r border-white/20 pt-4 sm:pt-0 sm:pr-6">
-            <div className="font-mono text-xs text-secondary-container uppercase tracking-wider mb-1">
-              MINIMUM RECOMMENDED STATION CAPACITY
-            </div>
-            <div className="font-data-display text-3xl text-secondary-container">
-              {recommendedSystemSizeKw} kWp
-            </div>
-          </div>
+    <div className="max-w-4xl mx-auto">
+      {/* Brutalist Step Progress Indicator */}
+      <div className="grid grid-cols-3 border-[3px] border-primary mb-10 text-center font-bold font-mono text-sm md:text-base shadow-neo bg-surface-container-lowest">
+        <div
+          className={`py-4 border-l-[3px] border-primary ${step === 1 ? "bg-secondary-container text-primary" : "text-gray-400"}`}
+        >
+          [01] اختيار القطاع
+        </div>
+        <div
+          className={`py-4 border-l-[3px] border-primary ${step === 2 ? "bg-secondary-container text-primary" : "text-gray-400"}`}
+        >
+          [02] مدخلات الأحمال
+        </div>
+        <div
+          className={`py-4 ${step === 3 ? "bg-secondary-container text-primary" : "text-gray-400"}`}
+        >
+          [03] التقرير والطلب
         </div>
       </div>
+
+      {/* STEP 1: SECTOR SELECTION */}
+      {step === 1 && (
+        <div className="flex flex-col gap-6 animate-fadeIn">
+          <div className="bg-primary text-white p-6 border-[3px] border-primary shadow-neo">
+            <h2 className="text-xl md:text-2xl font-black mb-2 uppercase">
+              مصفوفة تخصيص نوع المنظومة الشمسية
+            </h2>
+            <p className="text-sm text-gray-300">
+              اختر القطاع المستهدف للحصول على قائمة أحمال مخصصة تناسب نمط
+              الاستهلاك الفعلي في السودان.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-2">
+            {[
+              {
+                id: "residential",
+                title: "القطاع السكني",
+                desc: "منازل، شقق، مجمعات سكنية ومكيفات مياه ونسمة.",
+                icon: "home",
+              },
+              {
+                id: "agricultural",
+                title: "القطاع الزراعي",
+                desc: "مزارع، مشاريع إنتاجية، مضخات ري وأعماق غاطسة بالحصان.",
+                icon: "agriculture",
+              },
+              {
+                id: "commercial",
+                title: "القطاع التجاري",
+                desc: "متاجر، مكاتب، مستودعات تبريد، ومكيفات فريون وصيانة.",
+                icon: "storefront",
+              },
+            ].map((item) => (
+              <div
+                key={item.id}
+                onClick={() => setSector(item.id as Sector)}
+                className={`border-[4px] border-primary p-6 shadow-neo cursor-pointer transition-all flex flex-col gap-4 select-none group ${sector === item.id ? "bg-secondary-container transform -translate-x-1 -translate-y-1 shadow-neo-gold-lg" : "bg-surface-container-lowest hover:bg-surface-container"}`}
+              >
+                <div className="w-12 h-12 bg-primary text-white flex items-center justify-center border-[2px] border-primary group-hover:scale-105 transition-transform">
+                  <span className="material-symbols-outlined text-[28px]">
+                    {item.icon}
+                  </span>
+                </div>
+                <h3 className="font-black text-xl md:text-2xl uppercase">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-on-surface-variant font-medium leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex justify-end mt-6">
+            <button
+              onClick={() => setStep(2)}
+              className="bg-primary text-white font-black border-[3px] border-primary px-10 py-4 shadow-neo hover:-translate-x-1 hover:-translate-y-1 hover:shadow-neo-gold transition-all uppercase italic flex items-center gap-2"
+            >
+              الانتقال لجدول الأحمال{" "}
+              <span className="material-symbols-outlined">arrow_left</span>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* STEP 2: LOAD INPUTS GRID (CARD-BASED UX) */}
+      {step === 2 && (
+        <div className="flex flex-col gap-6 animate-fadeIn">
+          <div className="bg-primary text-white p-6 border-[3px] border-primary shadow-neo flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+              <h2 className="text-xl md:text-2xl font-black uppercase">
+                تحديد كميات وساعات تشغيل الأجهزة
+              </h2>
+              <p className="text-sm text-gray-300 mt-1">
+                قم بتعديل العدد وساعات التشغيل لكل جهاز. (يمكنك تعديل القدرة
+                بالواط إذا لزم الأمر).
+              </p>
+            </div>
+            <button
+              onClick={() => setStep(1)}
+              className="border-[2px] border-white/40 text-white text-xs px-4 py-2 hover:bg-white/10 uppercase font-mono font-bold w-full md:w-auto transition-colors"
+            >
+              [ تغيير القطاع ]
+            </button>
+          </div>
+
+          {/* Cards Grid Layout instead of a Table */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            {currentLoads.map((item, index) => (
+              <div
+                key={index}
+                className="border-[3px] border-primary p-5 bg-surface-container-lowest shadow-neo flex flex-col gap-5 hover:-translate-y-1 transition-transform"
+              >
+                {/* Card Header: Device Name */}
+                <div className="font-black text-primary text-lg md:text-xl border-b-[2px] border-primary/20 pb-2">
+                  {item.name}
+                </div>
+
+                {/* Card Body: Controls */}
+                <div className="grid grid-cols-2 gap-4">
+                  {/* Quantity Control */}
+                  <div className="flex flex-col gap-1.5 col-span-2 sm:col-span-1">
+                    <span className="text-xs font-bold text-gray-500 uppercase">
+                      العدد الحالي
+                    </span>
+                    <div className="flex items-center border-[2px] border-primary bg-white h-12">
+                      <button
+                        onClick={() =>
+                          updateLoad(
+                            index,
+                            "quantity",
+                            Math.max(0, item.quantity - 1),
+                          )
+                        }
+                        className="w-12 h-full bg-gray-100 border-l border-primary font-black text-xl hover:bg-secondary-container active:bg-primary active:text-white transition-colors"
+                      >
+                        -
+                      </button>
+                      <input
+                        type="number"
+                        value={item.quantity}
+                        onChange={(e) =>
+                          updateLoad(
+                            index,
+                            "quantity",
+                            Math.max(0, parseInt(e.target.value) || 0),
+                          )
+                        }
+                        className="w-full h-full text-center font-mono font-black text-lg border-none outline-none focus:bg-secondary-container"
+                      />
+                      <button
+                        onClick={() =>
+                          updateLoad(index, "quantity", item.quantity + 1)
+                        }
+                        className="w-12 h-full bg-gray-100 border-r border-primary font-black text-xl hover:bg-secondary-container active:bg-primary active:text-white transition-colors"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Hours Control */}
+                  <div className="flex flex-col gap-1.5 col-span-2 sm:col-span-1">
+                    <span className="text-xs font-bold text-gray-500 uppercase">
+                      ساعات التشغيل/يوم
+                    </span>
+                    <input
+                      type="number"
+                      max="24"
+                      min="0"
+                      value={item.hours}
+                      onChange={(e) =>
+                        updateLoad(
+                          index,
+                          "hours",
+                          Math.min(
+                            24,
+                            Math.max(0, parseInt(e.target.value) || 0),
+                          ),
+                        )
+                      }
+                      className="h-12 w-full bg-white border-[2px] border-primary p-2 text-center font-mono font-black text-lg focus:bg-secondary-container outline-none transition-colors"
+                    />
+                  </div>
+
+                  {/* Watts Control */}
+                  <div className="flex flex-col gap-1.5 col-span-2">
+                    <span className="text-xs font-bold text-gray-500 uppercase">
+                      القدرة (واط) للجهاز الواحد
+                    </span>
+                    <input
+                      type="number"
+                      value={item.watts}
+                      onChange={(e) =>
+                        updateLoad(
+                          index,
+                          "watts",
+                          parseInt(e.target.value) || 0,
+                        )
+                      }
+                      className="h-12 w-full bg-surface-container-high border-[2px] border-primary p-2 text-center font-mono font-bold focus:bg-secondary-container outline-none transition-colors"
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-col-reverse md:flex-row justify-between mt-4 gap-4">
+            <button
+              onClick={() => setStep(1)}
+              className="bg-surface-container-lowest text-primary font-black border-[3px] border-primary px-6 py-4 shadow-neo hover:bg-surface-container transition-all text-center w-full md:w-auto"
+            >
+              رجوع للخلف
+            </button>
+            <button
+              onClick={() => setStep(3)}
+              className="bg-secondary-container text-primary font-black border-[3px] border-primary px-10 py-4 shadow-neo-gold-lg hover:-translate-x-1 hover:-translate-y-1 hover:shadow-neo shadow-black transition-all uppercase italic flex justify-center items-center gap-2 w-full md:w-auto"
+            >
+              توليد التقرير الهندسي{" "}
+              <span className="material-symbols-outlined">analytics</span>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* STEP 3: RESULTS MATRIX & WHATSAPP REDIRECT */}
+      {step === 3 && (
+        <div className="flex flex-col gap-6 animate-fadeIn">
+          <div className="bg-primary text-white p-6 border-[3px] border-primary shadow-neo">
+            <h2 className="text-xl md:text-2xl font-black uppercase">
+              التقرير الفني والحجم التقديري للمنظومة
+            </h2>
+            <p className="text-sm text-gray-300">
+              النتائج محسوبة وفقاً لمعايير الكفاءة والظروف المناخية وساعات ذروة
+              الشمس في السودان.
+            </p>
+          </div>
+
+          {/* Output Matrix Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="border-[3px] border-primary p-6 bg-surface-container-lowest shadow-neo flex flex-col justify-between">
+              <div>
+                <span className="font-mono text-xs uppercase text-gray-500 block mb-1">
+                  TOTAL CONSUMPTION
+                </span>
+                <h4 className="font-black text-xl mb-4">
+                  إجمالي استهلاك الطاقة اليومي
+                </h4>
+              </div>
+              <div className="text-4xl font-mono font-black text-primary bg-surface-container p-4 border-[2px] border-primary text-center shadow-inner">
+                {results.totalKwh.toFixed(1)}{" "}
+                <span className="text-lg">كيلوواط/يوم</span>
+              </div>
+            </div>
+
+            <div className="border-[3px] border-primary p-6 bg-surface-container-lowest shadow-neo flex flex-col justify-between">
+              <div>
+                <span className="font-mono text-xs uppercase text-gray-500 block mb-1">
+                  RECOMMENDED INVERTER
+                </span>
+                <h4 className="font-black text-xl mb-4">
+                  حجم العاكس (Inverter) المقترح
+                </h4>
+              </div>
+              <div className="text-4xl font-mono font-black text-secondary-container bg-primary p-4 border-[2px] border-primary text-center shadow-inner">
+                {results.recommendedInverterKw}{" "}
+                <span className="text-lg text-white">كيلوواط</span>
+              </div>
+            </div>
+
+            <div className="border-[3px] border-primary p-6 bg-surface-container-lowest shadow-neo flex flex-col justify-between">
+              <div>
+                <span className="font-mono text-xs uppercase text-gray-500 block mb-1">
+                  SOLAR PV ARRAY
+                </span>
+                <h4 className="font-black text-xl mb-4">
+                  الحد الأدنى لإنتاج الألواح المطلوبة
+                </h4>
+              </div>
+              <div className="text-4xl font-mono font-black text-primary bg-secondary-container p-4 border-[2px] border-primary text-center shadow-neo">
+                {results.recommendedSolarKw}{" "}
+                <span className="text-lg">كيلوواط ذروة</span>
+              </div>
+            </div>
+
+            <div className="border-[3px] border-primary p-6 bg-surface-container-lowest shadow-neo flex flex-col justify-between">
+              <div>
+                <span className="font-mono text-xs uppercase text-gray-500 block mb-1">
+                  BATTERY BANK REQ
+                </span>
+                <h4 className="font-black text-xl mb-4">
+                  سعة التخزين والبطاريات التقديرية
+                </h4>
+              </div>
+              <div className="text-4xl font-mono font-black text-gray-700 bg-surface-container p-4 border-[2px] border-primary text-center shadow-inner">
+                {results.recommendedBatteryKwh}{" "}
+                <span className="text-lg">كيلوواط/ساعة</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Action Area: WhatsApp Trigger */}
+          <div className="mt-4 border-[4px] border-primary bg-secondary-container p-6 md:p-8 shadow-neo-lg shadow-black flex flex-col gap-6">
+            <div className="text-primary">
+              <h3 className="font-black text-2xl md:text-3xl uppercase mb-2">
+                إرسال التقرير لبدء التصميم الهندسي
+              </h3>
+              <p className="text-sm md:text-base font-bold leading-relaxed">
+                اضغط على الزر أدناه لنقل كافة البيانات الحسابية التي قمت
+                بإدخالها مباشرة إلى المهندسين المختصين في شركة *سودا لار* عبر
+                الواتساب، للحصول على عرض أسعار فني ومالي مخصص ومطابق للمواصفات
+                المطلوبة فوراً.
+              </p>
+            </div>
+
+            <a
+              href={getWhatsAppLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-primary text-secondary-container font-black border-[3px] border-primary text-center py-5 text-lg md:text-xl shadow-neo shadow-black tracking-wider transition-all hover:-translate-x-1 hover:-translate-y-1 hover:shadow-neo-gold-lg active:translate-x-0 active:translate-y-0 active:shadow-none uppercase italic flex items-center justify-center gap-3"
+            >
+              <svg
+                className="w-6 h-6 fill-current"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.454 5.709 1.455h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              إرسال جدول البيانات والتقرير عبر الواتساب
+            </a>
+          </div>
+
+          <div className="flex justify-start mt-4">
+            <button
+              onClick={() => setStep(2)}
+              className="bg-surface-container-lowest text-primary font-black border-[3px] border-primary px-6 py-4 shadow-neo hover:bg-surface-container transition-all"
+            >
+              تعديل الأحمال الحالية
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
