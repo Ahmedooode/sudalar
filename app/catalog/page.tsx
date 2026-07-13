@@ -567,6 +567,34 @@ export default function CatalogPage() {
                               </p>
                             </div>
                           )}
+                        {inv.operationalData.faultAndErrorCodes &&
+                          inv.operationalData.faultAndErrorCodes.length > 0 &&
+                          inv.operationalData.faultAndErrorCodes[0].code !== "غير متاح" && (
+                            <div>
+                              <p className="font-mono text-[10px] text-on-surface-variant uppercase tracking-wider mb-2">
+                                أكواد الأعطال والأخطاء
+                              </p>
+                              <div className="border-[2px] border-primary overflow-hidden">
+                                <div className="grid grid-cols-[auto_1fr] bg-primary">
+                                  <span className="font-mono text-[9px] font-black text-white px-2 py-1 uppercase tracking-wider border-l-[2px] border-white/30">الكود</span>
+                                  <span className="font-mono text-[9px] font-black text-white px-2 py-1 uppercase tracking-wider">الوصف والحل</span>
+                                </div>
+                                {inv.operationalData.faultAndErrorCodes.map((fc, i) => (
+                                  <div
+                                    key={i}
+                                    className={`grid grid-cols-[auto_1fr] border-t-[2px] border-primary ${i % 2 === 0 ? "bg-surface-container-lowest" : "bg-surface-container-low"}`}
+                                  >
+                                    <span className="font-mono text-[10px] font-black text-primary px-2 py-1.5 border-l-[2px] border-primary whitespace-nowrap self-start">
+                                      {fc.code}
+                                    </span>
+                                    <span className="font-arabic text-[11px] text-on-background px-2 py-1.5 leading-relaxed">
+                                      {fc.description}
+                                    </span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
                         {inv.operationalData.wiringDiagramPorts &&
                           inv.operationalData.wiringDiagramPorts !== "غير متاح" && (
                             <div>
