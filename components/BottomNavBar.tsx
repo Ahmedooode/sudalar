@@ -36,16 +36,22 @@ export const BottomNavBar: React.FC = () => {
       path: "/grid",
       icon: "map",
     },
+    {
+      label: "Catalog",
+      arabicLabel: "الكتالوج",
+      path: "/catalog",
+      icon: "inventory_2",
+    },
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 md:hidden bg-surface-container-lowest border-t-[4px] border-primary h-20 flex justify-around items-center px-4 z-[99] shadow-neo-lg">
+    <nav className="fixed bottom-0 left-0 right-0 md:hidden bg-surface-container-lowest border-t-[4px] border-primary h-20 flex justify-around items-center px-1 z-[99] shadow-neo-lg">
       {navItems.map((item) => {
         const isActive = pathname === item.path;
         return (
           <Link key={item.path} href={item.path} className="no-underline">
             <button
-              className={`flex flex-col items-center justify-center gap-1 w-16 h-16 transition-all duration-150 border-[3px] ${
+              className={`flex flex-col items-center justify-center gap-0.5 w-14 h-14 transition-all duration-150 border-[3px] ${
                 isActive
                   ? "bg-secondary-container text-primary border-primary shadow-neo"
                   : "bg-transparent border-transparent text-on-surface-variant hover:bg-surface-container"
