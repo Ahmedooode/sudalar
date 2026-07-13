@@ -1,0 +1,832 @@
+[
+  {
+    "brand": "Crown Micro Global",
+    "modelName": "Elego-VI-6KW",
+    "modelNumber": "EOI-VI-6KW",
+    "inverterCategory": "عاكس هجين أحادي الطور — موجة جيبية نقية",
+    "pvInput": {
+      "maxPvInputPowerW": "7000 واط",
+      "nominalDcVoltageV": "360 فولت مستمر",
+      "maxDcVoltageV": "500 فولت مستمر",
+      "startupVoltageV": "130 فولت مستمر",
+      "initialFeedingVoltageV": "150 فولت مستمر",
+      "mpptVoltageRangeV": "120 — 430 فولت مستمر",
+      "numberOfMppts": "1 وحدة MPPT",
+      "maxPvInputCurrentA": "27 أمبير"
+    },
+    "acOutput": {
+      "ratedPowerW": "6000 واط",
+      "maxChargingPowerW": "6000 واط",
+      "nominalOutputVoltageV": "220 / 230 / 240 فولت متردد",
+      "outputVoltageRangeV": "184 — 264.5 فولت متردد أو 195.5 — 253 فولت متردد (قابل للاختيار)",
+      "nominalOutputCurrentA": "26 أمبير",
+      "powerFactor": "أكبر من 0.99",
+      "outputWaveform": "موجة جيبية نقية (Pure Sine Wave)",
+      "frequencyHz": "50 هرتز / 60 هرتز (إحساس تلقائي)",
+      "phases": "أحادي الطور",
+      "maxConversionEfficiencyDcAc": "95%",
+      "efficiencyBatteryMode": "93%"
+    },
+    "acInput": {
+      "acStartupVoltageV": "120 — 140 فولت متردد",
+      "autoRestartVoltageV": "180 فولت متردد",
+      "acceptableInputVoltageRangeV": "90 — 280 فولت متردد أو 170 — 280 فولت متردد (قابل للاختيار)",
+      "maxAcInputCurrentA": "40 أمبير"
+    },
+    "batteryManagement": {
+      "supportedBatteryTypes": "بطاريات ليثيوم أيون وحمض الرصاص وأنواع عميقة التفريغ",
+      "nominalBatteryVoltageV": "48 فولت مستمر",
+      "maxSolarChargingCurrentA": "120 أمبير",
+      "maxAcChargingCurrentA": "120 أمبير",
+      "maxTotalChargingCurrentA": "120 أمبير"
+    },
+    "connectivityAndProtection": {
+      "communicationPorts": "USB / RS-232 / اتصال جاف (Dry Contact)",
+      "wifiBuiltIn": "نعم — واي-فاي مدمج",
+      "display": "شاشة LCD مع لوحة لمس (Touch Pad)",
+      "ipRating": "IP21",
+      "parallelCapability": "توصيل توازٍ حتى 9 وحدات",
+      "operatingModes": "متصل بالشبكة مع احتياطي، تشغيل ذاتي، تغذية للشبكة",
+      "protections": "حماية من الحمل الزائد، القصر الكهربائي، عكس القطبية، الحرارة الزائدة"
+    },
+    "physical": {
+      "dimensionsDxWxHmm": "120 × 295 × 468 مم",
+      "weightKg": "12 كجم",
+      "operatingTempC": "من -10 إلى +50 درجة مئوية",
+      "humidity": "0 — 90% رطوبة نسبية"
+    },
+    "operationalData": {
+      "configurationSteps": "1. ضبط أولوية إمداد الطاقة (شمسي / شبكة / بطارية) عبر لوحة اللمس.\n2. برمجة أوضاع التشغيل المتعددة: Grid-tie، مع احتياطي، أو هجين.\n3. ضبط تيار الشحن وجهد الشحن من خلال إعدادات LCD.\n4. تفعيل وظيفة التغذية العكسية للشبكة (Feed-in to Grid) إذا لزم.\n5. اختيار نطاق جهد المدخل (90-280 أو 170-280 فولت).\n6. تكوين الوحدات الموازية (حتى 9 وحدات) عبر منفذ RS-232/Dry Contact.",
+      "faultAndErrorCodes": [
+        { "code": "غير متاح", "description": "غير متاح في بيانات الكتيب المُستخرجة — راجع دليل المستخدم الرسمي لـ EOI-VI-6KW" }
+      ],
+      "wiringDiagramPorts": "AC-IN (شبكة/مولّد أحادي الطور) — AC-OUT (خرج الأحمال) — PV+ / PV- (مدخل MPPT) — BAT+ / BAT- (بطارية 48 فولت) — USB / RS-232 / Dry Contact"
+    },
+    "dataSource": "https://crownmicroglobal.com/wp-content/uploads/2023/09/Elego6-6KW-New.pdf",
+    "dataAccuracy": "مُتحقَّق منه — مُستخرج من كتيب المنتج الرسمي (PDF)"
+  },
+  {
+    "brand": "Crown Micro Global",
+    "modelName": "Xavier-1200VA / Xavier-2400VA",
+    "modelNumber": "X-1.2KVA / X-2.4KVA",
+    "inverterCategory": "عاكس مستقل عن الشبكة — موجة جيبية محاكاة",
+    "pvInput": {
+      "maxPvInputPowerW": "غير متاح",
+      "mpptVoltageRangeV": "غير متاح",
+      "numberOfMppts": "غير متاح"
+    },
+    "acOutput": {
+      "ratedPowerVA": "1200 فولت-أمبير (Xavier-1200VA) / 2400 فولت-أمبير (Xavier-2400VA)",
+      "ratedPowerW": "900 واط (Xavier-1200VA) / 1600 واط (Xavier-2400VA)",
+      "nominalOutputVoltageV": "230 فولت متردد ± 10%",
+      "frequencyHz": "50 هرتز أو 60 هرتز ± 1 هرتز",
+      "phases": "أحادي الطور",
+      "outputWaveform": "موجة جيبية محاكاة (Simulated Sine Wave)",
+      "transferTimeMs": "20 ميلي ثانية (نموذجي)"
+    },
+    "acInput": {
+      "nominalInputVoltageV": "230 فولت متردد",
+      "inputVoltageRangeV": "90 — 280 فولت متردد أو 170 — 280 فولت متردد",
+      "inputFrequencyHz": "50 هرتز أو 60 هرتز (إحساس تلقائي)"
+    },
+    "batteryManagement": {
+      "supportedBatteryTypes": "بطاريات حمض الرصاص القابلة لإعادة الشحن وبطاريات عميقة التفريغ",
+      "batteryVoltageV": "12 فولت (Xavier-1200VA) / 24 فولت (Xavier-2400VA)",
+      "dcStartVoltageV": "أكبر من 11 فولت (Xavier-1200VA) / أكبر من 22 فولت (Xavier-2400VA)",
+      "constantCurrentChargeVoltageV": "14.3 فولت ± 2% (Xavier-1200VA) / 28.6 فولت ± 2% (Xavier-2400VA)",
+      "floatingChargeVoltageV": "13.7 فولت ± 2% (Xavier-1200VA) / 27.4 فولت ± 2% (Xavier-2400VA)",
+      "maxAcChargingCurrentA": "10 أمبير أو 25 أمبير (قابل للاختيار)"
+    },
+    "connectivityAndProtection": {
+      "communicationPorts": "غير متاح",
+      "ipRating": "غير متاح",
+      "display": "شاشة LCD مع شريط إضاءة RGB",
+      "protections": "حماية من الحمل الزائد، القصر الكهربائي، عكس القطبية، الحرارة الزائدة",
+      "mountingOptions": "مكتبي (Desktop) أو تعليق على الجدار (Wall-Mount)"
+    },
+    "physical": {
+      "operatingTempC": "من 0 إلى +40 درجة مئوية",
+      "storageTempC": "من -15 إلى +50 درجة مئوية",
+      "humidity": "0 — 90% رطوبة نسبية"
+    },
+    "operationalData": {
+      "configurationSteps": "1. اختيار نطاق جهد المدخل المناسب (90-280 أو 170-280 فولت).\n2. اختيار تيار شحن البطارية (10 أمبير أو 25 أمبير) عبر مفتاح الاختيار.\n3. التحقق من جهد البطارية (12 فولت للموديل 1200VA / 24 فولت للموديل 2400VA).\n4. التوصيل: مدخل AC (شبكة) — خرج AC (أحمال) — طرفيا البطارية.",
+      "faultAndErrorCodes": [
+        { "code": "غير متاح", "description": "غير متاح في بيانات الكتيب المُستخرجة — راجع دليل المستخدم الرسمي" }
+      ],
+      "wiringDiagramPorts": "AC-IN (شبكة/مولّد) — AC-OUT (أحمال) — BAT+ / BAT- — شريط LED RGB للإشارة إلى حالة التشغيل"
+    },
+    "dataSource": "https://crownmicroglobal.com/wp-content/uploads/2024/01/Cown-Micro-Xavier-1200VA-900W.pdf",
+    "dataAccuracy": "مُتحقَّق منه — مُستخرج من كتيب المنتج الرسمي (PDF)"
+  },
+  {
+    "brand": "Crown Micro Global",
+    "modelName": "Oyster Three Phase LV Hybrid — 5/6/8/10/12/15/20KW",
+    "modelNumber": "EOI-OYS-5KW-3P إلى EOI-OYS-20KW-3P",
+    "inverterCategory": "عاكس هجين ثلاثي الأطوار — جهد بطارية منخفض (LV)",
+    "pvInput": {
+      "ratedPvInputVoltageV": "690 فولت",
+      "maxPvInputVoltageV": "1000 فولت",
+      "mpptVoltageRangeV": "200 — 900 فولت",
+      "startupVoltageV": "100 فولت",
+      "numberOfMppts": "3 وحدات MPPT (تكوين 1:1:1)"
+    },
+    "acOutput": {
+      "ratedVoltageV": "3L/N/PE — 230/400 فولت متردد",
+      "frequencyHz": "50 هرتز أو 60 هرتز",
+      "phases": "ثلاثي الأطوار",
+      "powerFactor": "0.99 (قابل للضبط من 0.8 متقدم إلى 0.8 متأخر)",
+      "thdi": "أقل من 3%",
+      "outputWaveform": "موجة جيبية نقية",
+      "surgePower": "1.5 × الطاقة الاسمية لمدة 5 دقائق",
+      "ratedOutputPowerPerPhaseW_and_CurrentA": {
+        "EOI-OYS-5KW-3P": "5000 واط / 7.20 أمبير لكل طور",
+        "EOI-OYS-6KW-3P": "6000 واط / 8.70 أمبير لكل طور",
+        "EOI-OYS-8KW-3P": "8000 واط / 11.60 أمبير لكل طور",
+        "EOI-OYS-10KW-3P": "10000 واط / 14.50 أمبير لكل طور",
+        "EOI-OYS-12KW-3P": "12000 واط / 17.40 أمبير لكل طور",
+        "EOI-OYS-15KW-3P": "15000 واط / 21.70 أمبير لكل طور",
+        "EOI-OYS-20KW-3P": "20000 واط / 29.00 أمبير لكل طور"
+      }
+    },
+    "batteryManagement": {
+      "supportedBatteryTypes": "بطاريات ليثيوم أيون وحمض الرصاص",
+      "batteryVoltageRangeV": "40 — 60 فولت",
+      "maxChargingCurrentA": "125 أمبير (5 ك) / 150 أمبير (6 ك) / 200 أمبير (8 ك) / 250 أمبير (10–20 ك)",
+      "chargingStrategy": "تكيُّف تلقائي مع نظام BMS للبطارية"
+    },
+    "connectivityAndProtection": {
+      "communicationPorts": "Touch Color Screen / RS485 / WiFi / CAN",
+      "ipRating": "IP66",
+      "parallelCapability": "توصيل توازٍ حتى 16 وحدة",
+      "generatorPort": "منفذ مولّد مخصص متاح",
+      "protections": "حماية من عكس القطبية DC، زيادة التيار/الجهد، منع التزامن المنعزل، قصر دائرة AC، تسريب التيار، مراقبة الشبكة، مفتاح DC، حماية من الصواعق DC & AC Surge"
+    },
+    "efficiency": {
+      "maxEfficiency": "97.70%",
+      "maxChargeDischargeEfficiency": "94.0%"
+    },
+    "physical": {
+      "dimensionsWxHxDmm": "480 × 703 × 258 مم",
+      "weightKgPerModel": {
+        "EOI-OYS-5KW-3P": "9 كجم",
+        "EOI-OYS-6KW-3P": "10.9 كجم",
+        "EOI-OYS-8KW-3P": "14.5 كجم",
+        "EOI-OYS-10KW-3P": "18.1 كجم",
+        "EOI-OYS-12KW-3P": "21.8 كجم",
+        "EOI-OYS-15KW-3P": "27.1 كجم",
+        "EOI-OYS-20KW-3P": "36.25 كجم"
+      },
+      "ipRating": "IP66",
+      "operatingTempC": "من -25 إلى +60 درجة مئوية",
+      "storageTempC": "من -25 إلى +60 درجة مئوية",
+      "humidity": "0 — 100%",
+      "maxAltitudeM": "أقل من 2000 متر",
+      "noiseDb": "أقل من 50 ديسيبل",
+      "coolingMethod": "تبريد ذكي (Smart Cooling)",
+      "topology": "بدون محوّل (Transformer-less)",
+      "warranty": "5 سنوات / 10 سنوات"
+    },
+    "operationalData": {
+      "configurationSteps": "1. اختيار أولوية الطاقة (PV / بطارية / شبكة) عبر الشاشة اللمسية الملونة.\n2. جدولة ذكية لدورات الشحن والتفريغ (Smart Scheduling).\n3. ضبط معاملات مراقبة الشبكة وحماية التردد والجهد.\n4. تهيئة منفذ المولّد (GEN Port) للتشغيل التلقائي.\n5. برمجة وظيفة Peak Shaving وربط AC.\n6. ربط وحدات التوصيل المتوازي (حتى 16 وحدة) عبر CAN/RS485.",
+      "faultAndErrorCodes": [
+        { "code": "غير متاح", "description": "غير متاح في بيانات الكتالوج المُستخرجة — راجع دليل المستخدم الرسمي لسلسلة EOI-OYS-3P" }
+      ],
+      "wiringDiagramPorts": "3 مسارات MPPT مستقلة (PV+/PV-) — BAT+ / BAT- (40-60 فولت) — دخل شبكة 3-أطوار 3L/N/PE — خرج أحمال 3-أطوار — منفذ GEN مستقل — RS485 / WiFi / CAN"
+    },
+    "dataSource": "Crown Micro Global E-Catalogue 2025 (PDF) — الصفحة 10",
+    "dataAccuracy": "بيانات محورية مُتحقَّق منها — بعض قيم الأوزان مُستنتجة من ترتيب الجدول"
+  },
+  {
+    "brand": "Crown Micro Global",
+    "modelName": "Oyster Three Phase HV Hybrid — 6/8/10/12/15/20/25/30KW",
+    "modelNumber": "EOI-OYS-6KW-3PHV إلى EOI-OYS-30KW-3PHV",
+    "inverterCategory": "عاكس هجين ثلاثي الأطوار — جهد بطارية عالٍ (HV)",
+    "pvInput": {
+      "ratedPvInputVoltageV": "690 فولت",
+      "maxPvInputVoltageV": "1000 فولت",
+      "mpptVoltageRangeV": "200 — 900 فولت",
+      "startupVoltageV": "100 فولت",
+      "numberOfMppts": "2 وحدات MPPT (موديلات صغيرة) / 3 وحدات MPPT — تكوين 2:2:2 (موديلات كبيرة)"
+    },
+    "acOutput": {
+      "ratedVoltageV": "3L/N/PE — 230/400 فولت متردد",
+      "frequencyHz": "50 هرتز أو 60 هرتز",
+      "phases": "ثلاثي الأطوار",
+      "powerFactor": "0.99 (قابل للضبط من 0.8 متقدم إلى 0.8 متأخر)",
+      "thdi": "أقل من 3%",
+      "thdv": "أقل من 3%",
+      "maxAcPassthroughCurrentA": "75 أمبير",
+      "surgePower": "1.5 × الطاقة الاسمية لمدة 5 دقائق",
+      "ratedOutputCurrentPerPhaseA": {
+        "EOI-OYS-6KW-3PHV": "8.70 أمبير لكل طور",
+        "EOI-OYS-8KW-3PHV": "11.60 أمبير لكل طور",
+        "EOI-OYS-10KW-3PHV": "14.50 أمبير لكل طور",
+        "EOI-OYS-12KW-3PHV": "17.40 أمبير لكل طور",
+        "EOI-OYS-15KW-3PHV": "21.70 أمبير لكل طور",
+        "EOI-OYS-20KW-3PHV": "29.00 أمبير لكل طور",
+        "EOI-OYS-25KW-3PHV": "36.20 أمبير لكل طور",
+        "EOI-OYS-30KW-3PHV": "43.50 أمبير لكل طور"
+      }
+    },
+    "batteryManagement": {
+      "supportedBatteryTypes": "بطاريات ليثيوم أيون وحمض الرصاص (جهد عالٍ)",
+      "ratedBatteryVoltageV": "400 فولت",
+      "batteryVoltageRangeV": "100 — 800 فولت",
+      "maxChargingVoltageV": "800 فولت",
+      "maxChargingCurrentA": "40/40/40 أمبير (توزيع ثلاثي) للموديلات الصغيرة / 50/50/50 أمبير للكبيرة",
+      "forceWakeUpFromPV": "نعم — إمكانية إيقاظ البطارية من PV"
+    },
+    "generatorInput": {
+      "ratedGenVoltageV": "3L/N/PE — 230/400 فولت متردد",
+      "ratedGenFrequencyHz": "50 هرتز / 60 هرتز",
+      "ratedGenInputCurrentA": "30 أمبير",
+      "ratedGenInputPowerW": "20700 واط"
+    },
+    "connectivityAndProtection": {
+      "communicationPorts": "Touch Color Screen / RS485 / WiFi / CAN",
+      "ipRating": "IP66",
+      "parallelCapability": "توصيل توازٍ حتى 10 وحدات",
+      "unbalancedLoadSupport": "150% دعم للأحمال غير المتوازنة",
+      "protections": "حماية من عكس القطبية DC، زيادة التيار/الجهد، منع التزامن المنعزل، قصر دائرة AC، تسريب التيار، مراقبة الشبكة، مفتاح DC، حماية من الصواعق Type III"
+    },
+    "efficiency": {
+      "maxEfficiency": "97.4%",
+      "maxChargeDischargeEfficiency": "97.2%"
+    },
+    "physical": {
+      "dimensionsWxHxDmm": "480 × 703 × 258 مم",
+      "weightKg": "50 — 53 كجم",
+      "operatingTempC": "من -25 إلى +60 درجة مئوية",
+      "storageTempC": "من -40 إلى +70 درجة مئوية",
+      "humidity": "0 — 100%",
+      "maxAltitudeM": "أقل من 2000 متر",
+      "noiseDb": "أقل من 50 ديسيبل",
+      "coolingMethod": "تبريد ذكي (Smart Cooling) / تبريد طبيعي للموديلات الصغيرة",
+      "topology": "بدون محوّل (Transformer-less)",
+      "warranty": "5 سنوات / 10 سنوات"
+    },
+    "operationalData": {
+      "configurationSteps": "1. ضبط معاملات البطارية عالية الجهد (100-800 فولت) عبر الشاشة اللمسية.\n2. اختيار تكوين MPPT المناسب للموديل (2 أو 3 مسارات).\n3. تهيئة دعم الأحمال غير المتوازنة (150%).\n4. ضبط منفذ المولّد وبرمجة بدء التشغيل التلقائي.\n5. ربط وحدات التوصيل المتوازي (حتى 10 وحدات) عبر CAN/RS485.",
+      "faultAndErrorCodes": [
+        { "code": "غير متاح", "description": "غير متاح في بيانات الكتالوج المُستخرجة — راجع دليل المستخدم الرسمي لسلسلة EOI-OYS-3PHV" }
+      ],
+      "wiringDiagramPorts": "مسارات MPPT مستقلة (2 أو 3) — BAT+ / BAT- (100-800 فولت جهد عالٍ) — دخل/خرج شبكة 3-أطوار 3L/N/PE — منفذ GEN مستقل — RS485 / WiFi / CAN"
+    },
+    "dataSource": "Crown Micro Global E-Catalogue 2025 (PDF) — الصفحة 11",
+    "dataAccuracy": "بيانات محورية مُتحقَّق منها من الكتالوج الرسمي"
+  },
+  {
+    "brand": "Crown Micro Global",
+    "modelName": "Hybrid IP66 Single Phase — 6.5KW / 10KW",
+    "modelNumber": "سلسلة IP66 أحادي الطور",
+    "inverterCategory": "عاكس هجين أحادي الطور — درجة حماية IP66",
+    "pvInput": {
+      "maxPvInputPowerW": "9600 واط (6.5 ك) / 15000 واط (10 ك)",
+      "numberOfMppts": "2 وحدتا MPPT",
+      "mpptVoltageRangeV": "غير متاح"
+    },
+    "acOutput": {
+      "ratedPowerW": "6500 واط (6.5 ك) / 10000 واط (10 ك)",
+      "phases": "أحادي الطور",
+      "frequencyHz": "غير متاح"
+    },
+    "batteryManagement": {
+      "supportedBatteryTypes": "بطاريات ليثيوم أيون وحمض الرصاص",
+      "batteryVoltageRangeV": "غير متاح",
+      "maxChargingCurrentA": "210 أمبير",
+      "maxDischargingCurrentA": "210 أمبير"
+    },
+    "connectivityAndProtection": {
+      "communicationPorts": "غير متاح",
+      "ipRating": "IP66",
+      "parallelCapability": "حتى 6 وحدات (6.5 ك) / حتى 10 وحدات (10 ك)",
+      "generatorPort": "منفذ مولّد مستقل — تحكم ذكي",
+      "additionalFeatures": "Peak Shaving، ربط AC (AC Coupling)، جدولة ذكية للشحن والتفريغ (6 نطاقات زمنية)"
+    },
+    "operationalData": {
+      "configurationSteps": "1. ضبط أولوية مصدر الطاقة عبر الواجهة.\n2. برمجة جدول الشحن/التفريغ الذكي (6 نطاقات زمنية).\n3. تفعيل وظيفة Peak Shaving.\n4. ضبط إعدادات منفذ المولّد للتشغيل/الإيقاف التلقائي.",
+      "faultAndErrorCodes": [
+        { "code": "غير متاح", "description": "راجع دليل المستخدم الرسمي" }
+      ],
+      "wiringDiagramPorts": "غير متاح بالتفصيل — يُرجى الرجوع إلى دليل التركيب الرسمي"
+    },
+    "dataSource": "Crown Micro Global E-Catalogue 2025 — الصفحة 9",
+    "dataAccuracy": "بيانات جزئية من الكتالوج الرسمي"
+  },
+  {
+    "brand": "ديي — Deye",
+    "modelName": "SUN-3.6/5/6/7/7.6/8/10K-SG05LP1-EU",
+    "modelNumber": "SUN-SG05LP1-EU Series",
+    "inverterCategory": "عاكس هجين أحادي الطور — جهد بطارية منخفض (LV)",
+    "pvInput": {
+      "maxPvAccessPowerW": "7200 واط (3.6 ك) — 20000 واط (10 ك)",
+      "maxPvInputPowerW": "5760 واط (3.6 ك) — 16000 واط (10 ك)",
+      "maxPvVoltageV": "500 فولت",
+      "mpptVoltageRangeV": "150 — 425 فولت",
+      "numberOfMppts": "2 وحدتا MPPT (تكوين 1+1 للموديلات 3.6–8 ك / تكوين 2+2 لموديل 10 ك)",
+      "maxPvInputCurrentPerMpptA": "13 أمبير لكل مسار (3.6–8 ك) / 26 أمبير (10 ك)",
+      "maxShortCircuitCurrentA": "17 أمبير (3.6–8 ك) / 34 أمبير (10 ك)"
+    },
+    "acOutput": {
+      "ratedPowerW": "3600 / 5000 / 6000 / 7000 / 7600 / 8000 / 10000 واط",
+      "maxApparentPowerVA": "3960 / 5500 / 6600 / 7700 / 8360 / 8800 / 11000 فولت-أمبير",
+      "nominalOutputVoltageV": "220 / 230 فولت متردد (نطاق: 0.85Un — 1.1Un)",
+      "frequencyHz": "50 هرتز (45–55) أو 60 هرتز (55–65)",
+      "phases": "أحادي الطور (L+N+PE)",
+      "ratedOutputCurrentA": "15.7 / 21.7 / 26.1 / 30.5 / 33 / 34.8 / 43.5 أمبير",
+      "maxOutputCurrentA": "17.2 / 23.9 / 28.7 / 33.5 / 36.3 / 38.3 / 47.9 أمبير",
+      "peakPowerOffGrid": "ضعف الطاقة الاسمية لمدة 10 ثوانٍ"
+    },
+    "batteryManagement": {
+      "supportedBatteryTypes": "بطاريات حمض الرصاص أو ليثيوم أيون",
+      "batteryVoltageRangeV": "40 — 60 فولت",
+      "maxChargingCurrentA": "90 / 120 / 135 / 175 / 190 / 190 / 210 أمبير",
+      "maxDischargingCurrentA": "90 / 120 / 135 / 175 / 190 / 190 / 210 أمبير",
+      "numberOfBatteryInputs": "1 مدخل"
+    },
+    "connectivityAndProtection": {
+      "communicationPorts": "WiFi / RS485 / CAN",
+      "ipRating": "IP65",
+      "display": "شاشة LCD",
+      "coolingMethod": "تبريد هوائي ذكي",
+      "protections": "حماية من عكس القطبية DC، زيادة التيار AC، حرارية، جهد زائد، قصر كهربائي، كشف العزل"
+    },
+    "efficiency": {
+      "maxEfficiency": "97.6%",
+      "euroEfficiency": "96.5%",
+      "mpptEfficiency": "أكثر من 99%"
+    },
+    "physical": {
+      "dimensionsWxHxDmm": "330 × 580 × 232 مم",
+      "weightKg": "24.9 كجم",
+      "operatingTempC": "من -40 إلى +60 درجة مئوية",
+      "humidity": "0 — 100%",
+      "noiseDb": "أقل من 45 ديسيبل",
+      "warranty": "5 سنوات أو 10 سنوات"
+    },
+    "operationalData": {
+      "configurationSteps": "1. توصيل ألواح PV بمدخلَي MPPT (PV1+/PV1- و PV2+/PV2-).\n2. توصيل البطارية بطرفيّ BAT+ / BAT- (48 فولت اسمي، 40-60 فولت).\n3. توصيل الشبكة بطرف GRID (L+N+PE).\n4. توصيل أحمال اللودشيدينج بطرف LOAD (L+N+PE).\n5. ضبط أولوية مصدر الطاقة عبر LCD.\n6. إعداد بروتوكول BMS عبر CAN أو RS485 إذا استُخدمت بطارية ليثيوم.",
+      "faultAndErrorCodes": [
+        { "code": "غير متاح", "description": "تنزيل الدليل من: deyeinverter.com/download/product-manual/" }
+      ],
+      "wiringDiagramPorts": "PV1+/PV1- (MPPT مسار 1) — PV2+/PV2- (MPPT مسار 2) — BAT+/BAT- (بطارية 40-60 فولت) — GRID L/N/PE (شبكة) — LOAD L/N/PE (أحمال) — WiFi / RS485 / CAN (BMS)"
+    },
+    "dataSource": "https://www.deyeinverter.com/product/single-phase-low-voltage-hybrid-inverter/",
+    "dataAccuracy": "مُتحقَّق منه — مُستخرج من صفحة المنتج الرسمية (HTML)"
+  },
+  {
+    "brand": "ديي — Deye",
+    "modelName": "SUN-12/14/16K-SG01LP1-EU",
+    "modelNumber": "SUN-SG01LP1-EU Series",
+    "inverterCategory": "عاكس هجين أحادي الطور — جهد بطارية منخفض (LV) — طاقة عالية",
+    "pvInput": {
+      "maxPvAccessPowerW": "24000 واط (12 ك) / 28000 واط (14 ك) / 32000 واط (16 ك)",
+      "maxPvInputPowerW": "19200 واط (12 ك) / 22400 واط (14 ك) / 25600 واط (16 ك)",
+      "maxPvVoltageV": "500 فولت",
+      "startupVoltageV": "125 فولت",
+      "mpptVoltageRangeV": "150 — 425 فولت",
+      "ratedPvInputVoltageV": "370 فولت",
+      "numberOfMppts": "3 وحدات MPPT (تكوين 2+2+2)",
+      "maxPvInputCurrentA": "32+32+32 أمبير",
+      "maxShortCircuitCurrentA": "60+60+60 أمبير"
+    },
+    "acOutput": {
+      "ratedPowerW": "12000 / 14000 / 16000 واط",
+      "maxApparentPowerVA": "13200 / 15400 / 17600 فولت-أمبير",
+      "nominalOutputVoltageV": "220 / 230 فولت متردد (L+N+PE)",
+      "frequencyHz": "50 هرتز (45–55) أو 60 هرتز (55–65)",
+      "phases": "أحادي الطور",
+      "ratedOutputCurrentA": "52.2 / 60.9 / 69.6 أمبير",
+      "maxOutputCurrentA": "57.4 / 67 / 76.5 أمبير",
+      "powerFactorRange": "0.8 متقدم — 0.8 متأخر",
+      "thdi": "أقل من 3%",
+      "dcInjectionCurrent": "أقل من 0.5% من التيار الاسمي",
+      "peakPowerOffGrid": "ضعف الطاقة الاسمية لمدة 10 ثوانٍ"
+    },
+    "batteryManagement": {
+      "supportedBatteryTypes": "بطاريات حمض الرصاص أو ليثيوم أيون",
+      "batteryVoltageRangeV": "40 — 60 فولت",
+      "maxChargingCurrentA": "220 أمبير (12 ك) / 250 أمبير (14 ك) / 290 أمبير (16 ك)",
+      "maxDischargingCurrentA": "220 أمبير (12 ك) / 250 أمبير (14 ك) / 290 أمبير (16 ك)",
+      "numberOfBatteryInputs": "2 مدخلان"
+    },
+    "connectivityAndProtection": {
+      "communicationPorts": "WiFi / RS485 / CAN",
+      "ipRating": "IP65",
+      "protections": "حماية من عكس القطبية DC، زيادة التيار AC، حرارية، جهد زائد، قصر كهربائي، كشف قوس كهربائي (اختياري)، منع التزامن المنعزل، مفتاح DC، كشف العزل"
+    },
+    "efficiency": {
+      "maxEfficiency": "97.6%",
+      "euroEfficiency": "96.5%",
+      "mpptEfficiency": "أكثر من 99%"
+    },
+    "physical": {
+      "dimensionsWxHxDmm": "464 × 763 × 282 مم",
+      "weightKg": "52 كجم",
+      "operatingTempC": "من -40 إلى +60 درجة مئوية",
+      "maxAltitudeM": "2000 متر",
+      "noiseDb": "أقل من 45 ديسيبل"
+    },
+    "operationalData": {
+      "configurationSteps": "1. توصيل ألواح PV بثلاثة مسارات MPPT.\n2. توصيل بطاريتين بالمدخلَين BAT1 و BAT2 (40-60 فولت لكل منهما).\n3. توصيل الشبكة بطرف GRID (L+N+PE).\n4. توصيل أحمال الخرج بطرف LOAD (L+N+PE).\n5. ضبط أولوية الطاقة وتيار الشحن عبر واجهة المستخدم.\n6. تكوين بروتوكول BMS عبر CAN أو RS485.",
+      "faultAndErrorCodes": [
+        { "code": "غير متاح", "description": "راجع دليل المستخدم الرسمي من deyeinverter.com/download/product-manual/" }
+      ],
+      "wiringDiagramPorts": "PV1+/- (MPPT1) — PV2+/- (MPPT2) — PV3+/- (MPPT3) — BAT1+/BAT1- — BAT2+/BAT2- — GRID L/N/PE — LOAD L/N/PE — WiFi / RS485 / CAN"
+    },
+    "dataSource": "https://www.deyeinverter.com/product/single-phase-low-voltage-hybrid-inverter/",
+    "dataAccuracy": "مُتحقَّق منه — مُستخرج من صفحة المنتج الرسمية (HTML)"
+  },
+  {
+    "brand": "ديي — Deye",
+    "modelName": "SUN-7.6/8/10/12K-SG02LP1-EU",
+    "modelNumber": "SUN-SG02LP1-EU-AM2/AM3 Series",
+    "inverterCategory": "عاكس هجين أحادي الطور — جهد بطارية منخفض (LV)",
+    "pvInput": {
+      "maxPvAccessPowerW": "15200 واط (7.6 ك) — 24000 واط (12 ك)",
+      "maxPvVoltageV": "500 فولت",
+      "startupVoltageV": "125 فولت",
+      "mpptVoltageRangeV": "150 — 425 فولت",
+      "numberOfMppts": "2 وحدتا MPPT (7.6/8 ك) / 3 وحدات MPPT (10/12 ك)",
+      "maxPvInputCurrentA": "26+26 أمبير (2 مسار) / 26+26+26 أمبير (3 مسارات)"
+    },
+    "acOutput": {
+      "ratedPowerW": "7600 / 8000 / 10000 / 12000 واط",
+      "nominalOutputVoltageV": "220 / 230 فولت متردد",
+      "frequencyHz": "50 هرتز أو 60 هرتز",
+      "phases": "أحادي الطور",
+      "ratedOutputCurrentA": "33.1 — 52.2 أمبير",
+      "peakPowerOffGrid": "ضعف الطاقة الاسمية لمدة 10 ثوانٍ"
+    },
+    "batteryManagement": {
+      "supportedBatteryTypes": "بطاريات حمض الرصاص أو ليثيوم أيون",
+      "batteryVoltageRangeV": "40 — 60 فولت",
+      "maxChargingCurrentA": "190 أمبير (7.6/8 ك) / 220–250 أمبير (10/12 ك)",
+      "maxDischargingCurrentA": "190 أمبير (7.6/8 ك) / 220–250 أمبير (10/12 ك)"
+    },
+    "connectivityAndProtection": {
+      "communicationPorts": "RS485 / RS232 / CAN — خيارات إضافية: GPRS / WiFi / بلوتوث / 4G / LAN",
+      "ipRating": "IP65"
+    },
+    "efficiency": {
+      "maxEfficiency": "97.6%",
+      "euroEfficiency": "96.5%"
+    },
+    "physical": {
+      "dimensionsWxHxDmm": "420 × 670 × 233 مم",
+      "weightKg": "35.6 كجم",
+      "operatingTempC": "من -40 إلى +60 درجة مئوية"
+    },
+    "operationalData": {
+      "configurationSteps": "1. توصيل PV بمسارات MPPT المناسبة (2 أو 3 حسب الموديل).\n2. توصيل البطارية BAT+/BAT- (40-60 فولت).\n3. توصيل GRID و LOAD بالطرفيّات المخصصة.\n4. ضبط بروتوكول الاتصال المطلوب (RS485 / CAN / GPRS).",
+      "faultAndErrorCodes": [
+        { "code": "غير متاح", "description": "راجع دليل المستخدم الرسمي من deyeinverter.com/download/product-manual/" }
+      ],
+      "wiringDiagramPorts": "PV1+/PV1- — PV2+/PV2- — (PV3+/PV3- للموديلات 10/12 ك) — BAT+/BAT- — GRID L/N/PE — LOAD L/N/PE — RS485 / RS232 / CAN"
+    },
+    "dataSource": "https://www.deyeinverter.com/product/single-phase-low-voltage-hybrid-inverter/",
+    "dataAccuracy": "مُتحقَّق منه — مُستخرج من صفحة المنتج الرسمية (HTML)"
+  },
+  {
+    "brand": "ديي — Deye",
+    "modelName": "SUN-3/3.6/5/6K-SG04LP1-EU",
+    "modelNumber": "SUN-SG04LP1-EU-SM1/SM2 Series",
+    "inverterCategory": "عاكس هجين أحادي الطور — جهد بطارية منخفض (LV)",
+    "pvInput": {
+      "maxPvAccessPowerW": "6000 واط (3/3.6 ك) / 7200–10000 واط (5/6 ك)",
+      "maxPvVoltageV": "500 فولت",
+      "mpptVoltageRangeV": "150 — 425 فولت",
+      "ratedPvInputVoltageV": "370 فولت",
+      "numberOfMppts": "1 وحدة MPPT (تكوين 1/1) أو 2 وحدتا MPPT (تكوين 2/1+1)",
+      "maxPvInputCurrentA": "18 أمبير (MPPT واحد) / 18+18 أمبير (مزدوج)",
+      "maxShortCircuitCurrentA": "27 أمبير / 27+27 أمبير"
+    },
+    "acOutput": {
+      "ratedPowerW": "3000 / 3600 / 5000 / 6000 واط",
+      "maxApparentPowerVA": "3300 — 6600 فولت-أمبير",
+      "nominalOutputVoltageV": "220 / 230 فولت متردد (L+N+PE)",
+      "frequencyHz": "50 هرتز أو 60 هرتز",
+      "phases": "أحادي الطور",
+      "ratedOutputCurrentA": "13.1 — 26.1 أمبير",
+      "maxOutputCurrentA": "14.4 — 28.7 أمبير",
+      "maxAcPassthroughA": "35 — 40 أمبير",
+      "peakPowerOffGrid": "ضعف الطاقة الاسمية لمدة 10 ثوانٍ"
+    },
+    "batteryManagement": {
+      "supportedBatteryTypes": "بطاريات حمض الرصاص أو ليثيوم أيون",
+      "batteryVoltageRangeV": "20–30 فولت أو 40–60 فولت (حسب التكوين)",
+      "maxChargingCurrentA": "70 — 140 أمبير",
+      "maxDischargingCurrentA": "70 — 140 أمبير",
+      "numberOfBatteryInputs": "1 مدخل"
+    },
+    "connectivityAndProtection": {
+      "communicationPorts": "WiFi / RS485 / CAN",
+      "ipRating": "IP65",
+      "protections": "حماية من عكس القطبية DC، زيادة التيار AC، حرارية"
+    },
+    "efficiency": {
+      "maxEfficiency": "97.6%",
+      "euroEfficiency": "96.5%",
+      "mpptEfficiency": "أكثر من 99%"
+    },
+    "physical": {
+      "dimensionsWxHxDmm": "376 × 470 × 241.5 مم",
+      "weightKg": "17.6 — 19 كجم",
+      "operatingTempC": "من -40 إلى +60 درجة مئوية",
+      "noiseDb": "أقل من 45 ديسيبل"
+    },
+    "operationalData": {
+      "configurationSteps": "1. توصيل PV بمدخل MPPT (PV+ / PV- لكل مسار).\n2. اختيار جهد البطارية المناسب (20-30 فولت أو 40-60 فولت).\n3. توصيل BAT+/BAT- وضبط نوع البطارية عبر القائمة.\n4. توصيل GRID L/N/PE و LOAD L/N/PE.\n5. ضبط تيار الشحن ومصدر الطاقة الأولوي.\n6. تهيئة CAN/RS485 لبطاريات الليثيوم (BMS).",
+      "faultAndErrorCodes": [
+        { "code": "غير متاح", "description": "راجع دليل المستخدم الرسمي من deyeinverter.com/download/product-manual/" }
+      ],
+      "wiringDiagramPorts": "PV1+/PV1- — (PV2+/PV2- اختياري) — BAT+/BAT- — GRID L/N/PE — LOAD L/N/PE — WiFi / RS485 / CAN (BMS)"
+    },
+    "dataSource": "https://www.deyeinverter.com/product/single-phase-low-voltage-hybrid-inverter/",
+    "dataAccuracy": "مُتحقَّق منه — مُستخرج من صفحة المنتج الرسمية (HTML)"
+  },
+  {
+    "brand": "GSB Solar",
+    "modelName": "PV1800 PRO — 3KW / 5.2KW",
+    "modelNumber": "PV1800 PRO Series",
+    "inverterCategory": "عاكس هجين أحادي الطور — موجة جيبية نقية",
+    "pvInput": {
+      "maxPvVoltageV": "450 فولت (جهد دائرة مفتوحة)",
+      "mpptVoltageRangeV": "150 — 430 فولت مستمر",
+      "numberOfMppts": "وحدة MPPT مدمجة واحدة"
+    },
+    "acOutput": {
+      "ratedPowerW": "3000 واط أو 5200 واط",
+      "outputWaveform": "موجة جيبية نقية",
+      "phases": "أحادي الطور",
+      "frequencyHz": "غير متاح"
+    },
+    "batteryManagement": {
+      "supportedBatteryTypes": "غير متاح",
+      "batteryVoltageRangeV": "غير متاح",
+      "maxChargingCurrentA": "غير متاح"
+    },
+    "connectivityAndProtection": {
+      "communicationPorts": "USB / RS485 / واي-فاي (اختياري)",
+      "ipRating": "غير متاح",
+      "protections": "حماية من الحمل الزائد، القصر الكهربائي، التفريغ العميق، بدء تشغيل بارد (Cold Start)"
+    },
+    "operationalData": {
+      "configurationSteps": "1. ضبط وضع التشغيل (شمسي / شبكة / بطارية) عبر شاشة LCD الذكية.\n2. ضبط تيار الشحن وجهد الشحن من قائمة الإعدادات.\n3. يعمل الجهاز بدون بطارية (Battery-Independent).",
+      "faultAndErrorCodes": [
+        { "code": "غير متاح", "description": "راجع كتيب PV1800 PRO الرسمي أو دليل المستخدم" }
+      ],
+      "wiringDiagramPorts": "PV+ / PV- (MPPT) — BAT+ / BAT- — AC-IN (شبكة/مولّد) — AC-OUT (أحمال) — USB / RS485"
+    },
+    "dataSource": "gsbsolar.com + PDF Brochure (PV1800 PRO Series)",
+    "dataAccuracy": "بيانات جزئية — مُستخرجة من صفحة المنتج وكتيب PDF الرسمي"
+  },
+  {
+    "brand": "GSB Solar",
+    "modelName": "Hybrid Inverter 4KW / 6KW Axpert VM4 TWIN",
+    "modelNumber": "Axpert VM4 Series",
+    "inverterCategory": "عاكس هجين أحادي الطور — خرج مزدوج",
+    "pvInput": {
+      "maxPvVoltageV": "450 فولت مستمر",
+      "mpptVoltageRangeV": "60 — 450 فولت مستمر",
+      "numberOfMppts": "غير متاح",
+      "maxPvInputCurrentA": "27 أمبير"
+    },
+    "acOutput": {
+      "ratedPowerW": "4000 واط أو 6000 واط",
+      "outputWaveform": "موجة جيبية نقية",
+      "phases": "أحادي الطور",
+      "dualOutput": "نعم — خرجان منفصلان لإدارة الأحمال الذكية",
+      "frequencyHz": "غير متاح"
+    },
+    "batteryManagement": {
+      "supportedBatteryTypes": "غير متاح",
+      "batteryVoltageRangeV": "غير متاح",
+      "maxChargingCurrentA": "غير متاح",
+      "batteryEqualization": "وظيفة موازنة البطاريات (Equalization) مدمجة"
+    },
+    "connectivityAndProtection": {
+      "communicationPorts": "RS485 / CAN-BUS / RS232 (BMS) / واي-فاي مدمج",
+      "ipRating": "غير متاح",
+      "display": "شاشة LCD ملونة 4.3 بوصة لمسية + مؤشر LED-RGB",
+      "parallelCapability": "توصيل توازٍ حتى 9 وحدات"
+    },
+    "operationalData": {
+      "configurationSteps": "1. ضبط إعدادات الشحن ونوع البطارية عبر شاشة LCD اللمسية.\n2. ضبط أولوية مصدر الطاقة (شمسي / شبكة / بطارية).\n3. تكوين الاتصال ببروتوكول BMS عبر RS485/CAN-BUS.\n4. تفعيل خرجَي الحمل المنفصلَين للتحكم الذكي بالأحمال.",
+      "faultAndErrorCodes": [
+        { "code": "غير متاح", "description": "راجع دليل المستخدم الرسمي من gsbsolar.com" }
+      ],
+      "wiringDiagramPorts": "PV+ / PV- (مدخل MPPT) — BAT+ / BAT- — AC-IN — AC-OUT1 (حمل أساسي) — AC-OUT2 (حمل ثانوي) — RS485 / CAN / RS232 (BMS)"
+    },
+    "dataSource": "https://gsbsolar.com/product/hybrid-solar-inverter-4kw-twin/ + https://gsbsolar.com/product/gsb-solar-inverter-6kw-twin/",
+    "dataAccuracy": "بيانات جزئية — مُستخرجة من صفحات المنتج"
+  },
+  {
+    "brand": "GSB Solar",
+    "modelName": "Hybrid Inverter 8KW / 11KW MAX TWIN",
+    "modelNumber": "MAX TWIN Series",
+    "inverterCategory": "عاكس هجين أحادي الطور — طاقة عالية",
+    "pvInput": {
+      "numberOfMppts": "وحدتا MPPT مزدوجتان",
+      "mpptChargerRatingA": "120 أمبير (8 ك) / 150 أمبير (11 ك)",
+      "mpptVoltageRangeV": "غير متاح",
+      "maxPvVoltageV": "غير متاح"
+    },
+    "acOutput": {
+      "ratedPowerW": "8000 واط (8 ك) / 11000 واط (11 ك)",
+      "outputWaveform": "موجة جيبية نقية",
+      "phases": "أحادي الطور",
+      "dualOutput": "نعم — خرجان منفصلان",
+      "frequencyHz": "غير متاح"
+    },
+    "batteryManagement": {
+      "supportedBatteryTypes": "غير متاح",
+      "batteryVoltageRangeV": "غير متاح",
+      "maxChargingCurrentA": "غير متاح"
+    },
+    "connectivityAndProtection": {
+      "communicationPorts": "RS485 / CAN-BUS / RS232 (BMS) / واي-فاي مدمج",
+      "ipRating": "غير متاح",
+      "display": "شاشة LCD ملونة 5 بوصة لمسية + مؤشر LED-RGB",
+      "parallelCapability": "توصيل توازٍ حتى 6 وحدات"
+    },
+    "operationalData": {
+      "configurationSteps": "1. توصيل مدخلَي PV (Dual MPPT Input).\n2. ضبط تيار الشحن (120 أمبير للـ 8 ك / 150 أمبير للـ 11 ك) عبر LCD.\n3. تكوين بروتوكول BMS (RS485/CAN) للبطاريات الليثيومية.\n4. ضبط إدارة الخرجَين المنفصلَين.",
+      "faultAndErrorCodes": [
+        { "code": "غير متاح", "description": "راجع دليل GSB Solar MAX TWIN الرسمي" }
+      ],
+      "wiringDiagramPorts": "PV1+/PV1- (MPPT1) — PV2+/PV2- (MPPT2) — BAT+/BAT- — AC-IN — AC-OUT1 — AC-OUT2 — RS485 / CAN / RS232"
+    },
+    "dataSource": "https://gsbsolar.com/product/gsb-solar-inverter-8kw-max-twin/ + https://gsbsolar.com/product/gsb-hybrid-inverter-11kw/",
+    "dataAccuracy": "بيانات جزئية — مُستخرجة من صفحات المنتج"
+  },
+  {
+    "brand": "GSB Solar",
+    "modelName": "Hybrid Inverter 10KW / 15KW 48HY 3P",
+    "modelNumber": "48HY 3P Series",
+    "inverterCategory": "عاكس هجين ثلاثي الأطوار",
+    "pvInput": {
+      "mpptVoltageRangeV": "غير متاح",
+      "numberOfMppts": "غير متاح",
+      "maxPvVoltageV": "غير متاح"
+    },
+    "acOutput": {
+      "ratedPowerW": "10000 واط (10 ك) / 15000 واط (15 ك)",
+      "outputWaveform": "موجة جيبية نقية",
+      "phases": "ثلاثي الأطوار",
+      "frequencyHz": "غير متاح"
+    },
+    "batteryManagement": {
+      "supportedBatteryTypes": "متوافق مع أنواع بطاريات متعددة",
+      "batteryVoltageV": "48 فولت",
+      "maxChargingCurrentA": "غير متاح"
+    },
+    "connectivityAndProtection": {
+      "communicationPorts": "USB / RS-232 / Modbus / SNMP",
+      "ipRating": "غير متاح",
+      "parallelCapability": "توصيل توازٍ حتى 6 وحدات"
+    },
+    "operationalData": {
+      "configurationSteps": "1. اختيار أولوية الطاقة (شمسي / بطارية / شبكة) عبر واجهة البرمجة.\n2. ضبط أوضاع التشغيل: متصل بالشبكة، مستقل، هجين.\n3. برمجة جدول الشحن والتفريغ.\n4. تفعيل المراقبة اللحظية عبر منافذ USB/RS-232/Modbus.",
+      "faultAndErrorCodes": [
+        { "code": "غير متاح", "description": "راجع دليل 48HY 3P الرسمي" }
+      ],
+      "wiringDiagramPorts": "مدخلات PV — طرفيا البطارية 48 فولت — دخل/خرج الشبكة 3-أطوار — منافذ: USB / RS-232 / Modbus / SNMP"
+    },
+    "dataSource": "https://gsbsolar.com/product/gsb-hybrid-inverter-10kw-48hy/ + https://gsbsolar.com/product/solar-hybrid-inverter-15kw-48hy/",
+    "dataAccuracy": "بيانات جزئية — مُستخرجة من صفحات المنتج"
+  },
+  {
+    "brand": "GoodWe",
+    "modelName": "GW5000A-MS",
+    "modelNumber": "GW5000A-MS",
+    "inverterCategory": "عاكس وتري متصل بالشبكة أحادي الطور (Grid-Tie String Inverter)",
+    "pvInput": {
+      "maxPvInputPowerW": "7500 واط",
+      "maxPvVoltageV": "600 فولت",
+      "mpptVoltageRangeV": "80 — 550 فولت",
+      "numberOfMppts": "4 وحدات MPPT",
+      "maxPvInputCurrentPerMpptA": "12.5 أمبير",
+      "maxShortCircuitCurrentPerMpptA": "15.2 أمبير",
+      "minDcVoltageV": "80 فولت",
+      "startVoltageV": "95 فولت",
+      "maxDcAcRatio": "150% (يقبل تجاوز قدرة DC بنسبة 150%)"
+    },
+    "acOutput": {
+      "ratedPowerW": "5000 واط",
+      "maxOutputCurrentA": "20.8 أمبير",
+      "outputVoltageV": "غير متاح من المصدر",
+      "frequencyHz": "غير متاح من المصدر",
+      "phases": "أحادي الطور"
+    },
+    "batteryManagement": {
+      "supportedBatteryTypes": "لا ينطبق — عاكس متصل بالشبكة فقط",
+      "batteryVoltageRangeV": "لا ينطبق",
+      "maxChargingCurrentA": "لا ينطبق"
+    },
+    "connectivityAndProtection": {
+      "communicationPorts": "غير متاح من المصدر",
+      "ipRating": "غير متاح من المصدر",
+      "certifications": "UL1741 SA — California Rule 21 — HECO Rule 14 — IEEE 1547 — UL 1741 — UL1699B"
+    },
+    "efficiency": {
+      "maxEfficiency": "97.6%"
+    },
+    "physical": {
+      "dimensionsIn": "16.3 × 31.1 × 6.9 بوصة",
+      "weightLbs": "62.8 رطل (حوالي 28.5 كجم)"
+    },
+    "operationalData": {
+      "configurationSteps": "غير متاح من المصدر",
+      "faultAndErrorCodes": [
+        { "code": "غير متاح", "description": "راجع وثائق GoodWe الرسمية" }
+      ],
+      "wiringDiagramPorts": "4 مدخلات PV (لكل MPPT: PV+/PV-) — طرف شبكة AC (L/N/PE) — لا توجد طرفيات بطارية"
+    },
+    "dataSource": "https://www.gogreensolar.com/products/goodwe-gw5000a-ms-inverter",
+    "dataAccuracy": "بيانات PV جزئية مُتحقَّق منها — مواصفات AC ناقصة"
+  },
+  {
+    "brand": "GoodWe",
+    "modelName": "GW9600A-MS",
+    "modelNumber": "GW9600A-MS",
+    "inverterCategory": "عاكس وتري متصل بالشبكة أحادي الطور (Grid-Tie String Inverter)",
+    "pvInput": {
+      "maxPvInputPowerW": "12900 واط",
+      "maxPvVoltageV": "600 فولت",
+      "mpptVoltageRangeV": "80 — 550 فولت",
+      "numberOfMppts": "4 وحدات MPPT",
+      "maxPvInputCurrentPerMpptA": "12.5 أمبير",
+      "maxShortCircuitCurrentPerMpptA": "15.2 أمبير",
+      "minDcVoltageV": "80 فولت",
+      "startVoltageV": "95 فولت"
+    },
+    "acOutput": {
+      "ratedPowerW": "9600 واط",
+      "maxOutputCurrentA": "35.8 أمبير",
+      "outputVoltageV": "غير متاح من المصدر",
+      "frequencyHz": "غير متاح من المصدر",
+      "phases": "أحادي الطور"
+    },
+    "batteryManagement": {
+      "supportedBatteryTypes": "لا ينطبق",
+      "batteryVoltageRangeV": "لا ينطبق",
+      "maxChargingCurrentA": "لا ينطبق"
+    },
+    "connectivityAndProtection": {
+      "communicationPorts": "غير متاح من المصدر",
+      "ipRating": "غير متاح من المصدر"
+    },
+    "efficiency": {
+      "maxEfficiency": "97.6%"
+    },
+    "physical": {
+      "dimensionsIn": "16.3 × 31.1 × 6.9 بوصة",
+      "weightLbs": "70.5 رطل (حوالي 32 كجم)"
+    },
+    "operationalData": {
+      "configurationSteps": "غير متاح من المصدر",
+      "faultAndErrorCodes": [
+        { "code": "غير متاح", "description": "راجع وثائق GoodWe الرسمية" }
+      ],
+      "wiringDiagramPorts": "4 مدخلات PV (لكل MPPT: PV+/PV-) — طرف شبكة AC (L/N/PE) — لا طرفيات بطارية"
+    },
+    "dataSource": "https://www.gogreensolar.com/products/goodwe-gw9600a-ms-inverter",
+    "dataAccuracy": "بيانات PV جزئية مُتحقَّق منها — مواصفات AC ناقصة"
+  },
+  {
+    "brand": "ميجاصن — Megasun",
+    "modelName": "جميع الموديلات",
+    "modelNumber": "غير متاح",
+    "inverterCategory": "غير متاح — تعذّر الوصول",
+    "pvInput": {
+      "maxPvInputPowerW": "غير متاح",
+      "mpptVoltageRangeV": "غير متاح",
+      "numberOfMppts": "غير متاح"
+    },
+    "acOutput": {
+      "ratedPowerW": "غير متاح",
+      "phases": "غير متاح",
+      "frequencyHz": "غير متاح"
+    },
+    "batteryManagement": {
+      "supportedBatteryTypes": "غير متاح",
+      "batteryVoltageRangeV": "غير متاح",
+      "maxChargingCurrentA": "غير متاح"
+    },
+    "connectivityAndProtection": {
+      "communicationPorts": "غير متاح",
+      "ipRating": "غير متاح"
+    },
+    "operationalData": {
+      "configurationSteps": "غير متاح",
+      "faultAndErrorCodes": [
+        { "code": "غير متاح", "description": "غير متاح" }
+      ],
+      "wiringDiagramPorts": "غير متاح"
+    },
+    "dataSource": "https://megasun.com.pk/",
+    "dataAccuracy": "تعذّر الوصول — شهادة SSL منتهية الصلاحية. لا يمكن استخراج أي بيانات تقنية."
+  }
+]

@@ -70,6 +70,12 @@ export default function RootLayout({
               >
                 خريطة الشبكة
               </Link>
+              <Link
+                href="/catalog"
+                className={`font-bold text-sm uppercase tracking-wider ${pathname === "/catalog" ? "border-b-2 border-primary pb-1 text-primary" : "text-on-surface-variant hover:bg-secondary-container px-2 py-1 transition-all"}`}
+              >
+                الكتالوج
+              </Link>
             </nav>
 
             {/* MODIFIED: Changed from button to Next.js Link for Scenario 01 */}
