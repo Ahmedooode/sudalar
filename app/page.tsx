@@ -222,7 +222,7 @@ const dictionaries: { en: Dictionary; ar: Dictionary } = {
   },
   ar: {
     nav: {
-      title: "سودان سولار",
+      title: "Photon",
       stations: "المحطات",
       metrics: "المقاييس",
       infrastructure: "البنية التحتية",
@@ -232,7 +232,7 @@ const dictionaries: { en: Dictionary; ar: Dictionary } = {
       title1: "طـاقـة مـسـتـقـلـة",
       title2: "بديل للشبكة المترهلة",
       description:
-        "تجاوز الانهيار المستمر في شبكة الكهرباء القومية. تؤمن أنظمة سودان سولار بنية تحتية ثقيلة وحلول طاقة شمسية استراتيجية لعزل منشأتك، مزرعتك، أو منزلك تماماً عن تذبذبات التيار. كهرباء مستقرة بلا انقطاع.",
+        "تجاوز الانهيار المستمر في شبكة الكهرباء القومية. تؤمن أنظمة Photon بنية تحتية ثقيلة وحلول طاقة شمسية استراتيجية لعزل منشأتك، مزرعتك، أو منزلك تماماً عن تذبذبات التيار. كهرباء مستقرة بلا انقطاع.",
       cta_deploy: "دراسة جدوى النظام",
       cta_view: "عرض حالة الشبكة",
     },
@@ -342,6 +342,8 @@ export default function Home() {
   const selectLanguage = (selectedLang: "en" | "ar") => {
     setLang(selectedLang);
     setIsModalOpen(false);
+    localStorage.setItem("photon-lang", selectedLang);
+    window.dispatchEvent(new Event("photon-lang-change"));
   };
 
   const dict = dictionaries[lang];
@@ -377,7 +379,7 @@ export default function Home() {
               تفضيلات اللغة / Language
             </h2>
             <p className="text-on-surface-variant text-sm mb-6 font-medium">
-              الرجاء اختيار لغة تصفح موقع سودان سولار لإعداد البنى التحتية.
+              الرجاء اختيار لغة تصفح موقع Photon لإعداد البنى التحتية.
             </p>
             <div className="grid grid-cols-2 gap-4">
               <button

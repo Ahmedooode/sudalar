@@ -1,9 +1,7 @@
-"use client";
-
 import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import type { Metadata } from "next";
 import { Montserrat, Cairo } from "next/font/google";
+import { SiteHeader } from "../components/SiteHeader";
 import { BottomNavBar } from "../components/BottomNavBar";
 import "./globals.css";
 
@@ -19,16 +17,97 @@ const cairo = Cairo({
   display: "swap",
 });
 
+export const metadata: Metadata = {
+  metadataBase: new URL("https://photon-sd.com"),
+
+  title: {
+    default: "Photon | أنظمة الطاقة الشمسية في السودان — سكنية، زراعية، تجارية",
+    template: "%s | Photon Solar السودان",
+  },
+
+  description:
+    "Photon تقدم أنظمة طاقة شمسية متكاملة في السودان — الخرطوم، بحري، أم درمان، وسوق سعد قشرة. نصمم وننفذ منظومات سكنية وزراعية وتجارية بكفاءة عالية. كهرباء مستقلة وموثوقة بلا انقطاع.",
+
+  keywords: [
+    "طاقة شمسية السودان",
+    "أنظمة طاقة شمسية الخرطوم",
+    "منظومات سكنية شمسية",
+    "منظومات زراعية شمسية",
+    "منظومات تجارية شمسية",
+    "سولار السودان",
+    "طاقة شمسية بحري",
+    "طاقة شمسية أم درمان",
+    "سوق سعد قشرة بحري",
+    "كهرباء شمسية الخرطوم",
+    "انقطاع الكهرباء السودان",
+    "عاكس شمسي السودان",
+    "بطاريات شمسية السودان",
+    "ألواح شمسية السودان",
+    "photon solar sudan",
+    "solar energy khartoum",
+    "solar systems sudan",
+    "off-grid solar sudan",
+    "solar inverter sudan",
+  ],
+
+  authors: [{ name: "Photon Solar", url: "https://photon-sd.com" }],
+  creator: "Photon Solar Sudan",
+  publisher: "Photon Solar Sudan",
+
+  openGraph: {
+    type: "website",
+    locale: "ar_SD",
+    url: "https://photon-sd.com",
+    siteName: "Photon Solar السودان",
+    title: "Photon | أنظمة الطاقة الشمسية في السودان",
+    description:
+      "منظومات طاقة شمسية سكنية، زراعية، وتجارية في السودان. الخرطوم، بحري، سعد قشرة، وجميع الولايات. كهرباء مستقلة بلا انقطاع.",
+    images: [
+      {
+        url: "/assets/images/photon-04.png",
+        width: 1200,
+        height: 630,
+        alt: "Photon Solar — أنظمة الطاقة الشمسية في السودان",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Photon | أنظمة الطاقة الشمسية في السودان",
+    description:
+      "منظومات طاقة شمسية سكنية، زراعية، وتجارية في السودان. الخرطوم، بحري، سعد قشرة.",
+    images: ["/assets/images/photon-04.png"],
+  },
+
+  alternates: {
+    canonical: "https://photon-sd.com",
+    languages: {
+      "ar-SD": "https://photon-sd.com",
+    },
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
-
   return (
     <html
       lang="ar"
+      dir="rtl"
       className={`scroll-smooth ${montserrat.variable} ${cairo.variable}`}
     >
       <head>
@@ -38,60 +117,8 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased bg-background text-on-background min-h-screen pb-20 md:pb-0 font-arabic">
-        {/* GLOBAL HEADER - AUTO SHOWS ON ALL PAGES ON DESKTOP */}
-        <header className="bg-surface-container-lowest border-b-[4px] border-primary fixed top-0 left-0 w-full z-50 h-20">
-          <div className="flex justify-between items-center w-full px-4 md:px-10 h-full max-w-7xl mx-auto">
-            <div className="text-xl md:text-2xl font-black tracking-tighter text-primary">
-              سودان سولار
-            </div>
-
-            <nav className="hidden md:flex gap-8 items-center h-full">
-              <Link
-                href="/"
-                className={`font-bold text-sm uppercase tracking-wider ${pathname === "/" ? "border-b-2 border-primary pb-1 text-primary" : "text-on-surface-variant hover:bg-secondary-container px-2 py-1 transition-all"}`}
-              >
-                الرئيسية
-              </Link>
-              <Link
-                href="/viability"
-                className={`font-bold text-sm uppercase tracking-wider ${pathname === "/viability" ? "border-b-2 border-primary pb-1 text-primary" : "text-on-surface-variant hover:bg-secondary-container px-2 py-1 transition-all"}`}
-              >
-                الجدوى الكلية
-              </Link>
-              <Link
-                href="/calculator"
-                className={`font-bold text-sm uppercase tracking-wider ${pathname === "/calculator" ? "border-b-2 border-primary pb-1 text-primary" : "text-on-surface-variant hover:bg-secondary-container px-2 py-1 transition-all"}`}
-              >
-                حاسبة الأحمال
-              </Link>
-              <Link
-                href="/grid"
-                className={`font-bold text-sm uppercase tracking-wider ${pathname === "/grid" ? "border-b-2 border-primary pb-1 text-primary" : "text-on-surface-variant hover:bg-secondary-container px-2 py-1 transition-all"}`}
-              >
-                خريطة الشبكة
-              </Link>
-              <Link
-                href="/catalog"
-                className={`font-bold text-sm uppercase tracking-wider ${pathname === "/catalog" ? "border-b-2 border-primary pb-1 text-primary" : "text-on-surface-variant hover:bg-secondary-container px-2 py-1 transition-all"}`}
-              >
-                الكتالوج
-              </Link>
-            </nav>
-
-            {/* MODIFIED: Changed from button to Next.js Link for Scenario 01 */}
-            <Link
-              href="/calculator"
-              className="bg-secondary-container text-primary font-bold border-[3px] border-primary px-4 md:px-6 py-2 shadow-neo text-xs md:text-sm uppercase inline-block text-center hover:-translate-x-0.5 hover:-translate-y-0.5 transition-transform"
-            >
-              ابدأ الآن
-            </Link>
-          </div>
-        </header>
-
-        {/* CURRENT ROUTE CONTENT */}
+        <SiteHeader />
         {children}
-
-        {/* GLOBAL BOTTOM NAV BAR - AUTO SHOWS ON ALL PAGES ON MOBILE */}
         <BottomNavBar />
       </body>
     </html>
